@@ -25,6 +25,37 @@ Nexus/                  # This repo — only docker-compose, CI, shared config
 - **Infrastructure**: Docker Compose (dev), GitHub Actions (CI/CD)
 - **Observability**: Prometheus metrics, Grafana dashboards, Sentry error tracking
 - **Reverse proxy**: Traefik
+- **Project Management**: Redmine (project #57 nexus-saas at redmine.wesell.ro)
+
+## Development Practices
+
+### Redmine Tracking
+All work is tracked in Redmine project **#57 (nexus-saas)**. Every feature:
+- Has a Redmine issue before code is written
+- Is broken into task-packets (child issues for Design, Build, Test, Review, Secure phases)
+- Links commits via conventional commits: `feat(auth): add JWT refresh #123`
+- Is resolved when all task-packets are complete
+
+### ADR (Architecture Decision Records)
+Significant architectural decisions are documented in `docs/adr/`:
+- Format: `NNNN-title-with-dashes.md`
+- Template: `docs/adr/template.md`
+- When to create: new domain boundaries, technology choices, API patterns, data modeling decisions
+- The architect agent produces ADRs; the orchestrator ensures they're committed
+
+### Task-Packets
+Features are decomposed into structured task-packets:
+- Each packet = one phase (Design, Build, Test, Review, Secure)
+- Contains: goal, acceptance criteria, estimated hours, dependencies
+- Created as Redmine child issues under the feature issue
+- Use `/task-packet` prompt to generate
+
+### Contract-First API Design
+API endpoints follow contract-first development:
+- Contract YAML written in `docs/contracts/{domain}.yaml` before implementation
+- Pydantic schemas validate against the contract
+- Contracts are the source of truth for integration tests
+- The api-designer agent produces contracts; implementation follows the contract
 
 ## Build and Test
 All commands run from the **backend submodule** directory:
@@ -83,6 +114,19 @@ docker compose up --build
 - Pagination: cursor-based for lists, `limit` + `offset` query params.
 - All list endpoints support `?search=`, `?sort_by=`, `?order=asc|desc`.
 - Error responses follow RFC 7807 (Problem Details).
+
+## Documentation Structure
+```
+docs/
+  adr/              # Architecture Decision Records
+    template.md      # ADR template
+    0001-auth-strategy.md
+    0002-multi-tenant-model.md
+  contracts/         # API contracts (OpenAPI YAML)
+    auth.yaml
+    customers.yaml
+  architecture.md    # High-level architecture overview
+```
 
 ## Key Patterns
 - **Repository pattern**: data access behind interfaces, injected via `Depends()`.
