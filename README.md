@@ -6,14 +6,16 @@ A production-ready multi-tenant SaaS platform for small businesses -- electricia
 
 ## Environments
 
-| Environment | Web App | API | Server | Path | Ports |
-|-------------|---------|-----|--------|------|-------|
-| **Development** | localhost:3676 | localhost:3670 | local | — | 3670-3679 |
-| **Beta** | nexus-beta.wesell.ro | api-nexus-beta.wesell.ro | 192.168.1.31 | /home/projects/nexus.ro/beta | standard |
-| **Staging** | nexus-stage.wesell.ro | api-nexus-stage.wesell.ro | 192.168.1.31 | /home/projects/nexus.ro/stage | standard |
-| **Production** | nexus.wesell.ro | api-nexus.wesell.ro | 192.168.1.30 | /mnt/hdd/proiecte/nexus.ro/live | standard |
+All IPs, paths, ports, and credentials are defined in `.env` (never committed). Copy `.env.example` → `.env` and customize.
 
-Local development uses ports **367x** to avoid conflicts. Internal Docker services communicate on standard ports within the `nexus-net` network.
+| Environment | Web App | API | Server | Path |
+|-------------|---------|-----|--------|------|
+| **Development** | localhost:${PORT_FRONTEND} | localhost:${PORT_API} | local | — |
+| **Beta** | nexus-beta.wesell.ro | api-nexus-beta.wesell.ro | ${DEPLOY_HOST_BETA} | ${DEPLOY_PATH_BETA} |
+| **Staging** | nexus-stage.wesell.ro | api-nexus-stage.wesell.ro | ${DEPLOY_HOST_STAGE} | ${DEPLOY_PATH_STAGE} |
+| **Production** | nexus.wesell.ro | api-nexus.wesell.ro | ${DEPLOY_HOST_LIVE} | ${DEPLOY_PATH_LIVE} |
+
+See `.env.example` for all 30+ configurable variables including ports, credentials, rate limits, and deploy targets.
 
 ## Architecture
 
@@ -182,32 +184,23 @@ Nexus SaaS (#57)
 ## Build & Test
 
 ```sh
-# Quick start
-make up          # Start all services (ports 3670-3679)
-make install     # Install backend dependencies
+# First time setup
+cp .env.example .env        # Customize ports, credentials, paths
+make up                     # Start all services
+make install                # Install backend dependencies
 
 # Development workflow
-make check       # ruff + mypy + pytest (all in one)
-make test        # Run tests with coverage
-make migrate     # Apply database migrations
+make check                  # ruff + mypy + pytest
+make test                   # Run tests with coverage
+make migrate                # Apply database migrations
 
 # Docker
-make up-build    # Rebuild and start
-make logs        # Tail all service logs
-make down-clean  # Stop and reset database
+make up-build               # Rebuild and start
+make logs                   # Tail all service logs
+make down-clean             # Stop and reset database
 ```
 
-### Local Port Map
-
-| Service | Port | URL |
-|---------|------|-----|
-| API (Swagger) | 3670 | http://localhost:3670/docs |
-| PostgreSQL | 3671 | localhost:3671 |
-| Redis | 3672 | localhost:3672 |
-| pgAdmin | 3673 | http://localhost:3673 |
-| Mailpit UI | 3674 | http://localhost:3674 |
-| Mailpit SMTP | 3675 | localhost:3675 |
-| Frontend | 3676 | http://localhost:3676 |
+All IPs, ports, and credentials are in `.env` — never committed to Git.
 
 ## Security 🔐
 

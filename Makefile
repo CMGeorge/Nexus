@@ -1,4 +1,8 @@
 # Nexus SaaS — Development Makefile
+# All deployment paths/credentials from .env
+# Copy .env.example → .env and customize before use
+
+include .env
 
 .PHONY: help up down restart logs clean build test lint
 
@@ -8,15 +12,15 @@ help: ## Show this help
 # ── Docker ──
 
 up: ## Start all services
-	docker compose up -d
+	docker compose --env-file .env up -d
 
 up-build: ## Start all services with rebuild
-	docker compose up -d --build
+	docker compose --env-file .env up -d --build
 
 down: ## Stop all services
 	docker compose down
 
-down-clean: ## Stop all services and remove volumes (RESETS DATABASE)
+down-clean: ## Stop and remove volumes (RESETS DATABASE)
 	docker compose down -v
 
 restart: ## Restart all services
@@ -27,9 +31,6 @@ logs: ## View all logs
 
 logs-api: ## View API logs only
 	docker compose logs -f api
-
-logs-pg: ## View PostgreSQL logs only
-	docker compose logs -f postgres
 
 # ── Backend ──
 
@@ -48,43 +49,43 @@ lint: ## Run ruff linter
 typecheck: ## Run mypy type checker
 	cd backend && uv run mypy .
 
-check: lint typecheck test ## Run all quality checks (lint + typecheck + test)
+check: lint typecheck test ## Run all quality checks
 
 # ── Database ──
 
 migrate: ## Run Alembic migrations
 	cd backend && uv run alembic upgrade head
 
-migrate-create: ## Create a new Alembic migration (make migrate-create MSG="add customers table")
+migrate-create: ## Create migration (make migrate-create MSG="add customers table")
 	cd backend && uv run alembic revision --autogenerate -m "$(MSG)"
 
 migrate-rollback: ## Rollback last migration
 	cd backend && uv run alembic downgrade -1
 
 db-shell: ## Open PostgreSQL shell
-	docker compose exec postgres psql -U nexus -d nexus
+	docker compose exec postgres psql -U $(POSTGRES_USER) -d $(POSTGRES_DB)
 
 redis-shell: ## Open Redis CLI
 	docker compose exec redis redis-cli
 
 # ── Deploy ──
 
-deploy-beta: ## Deploy to beta (192.168.1.31:/home/projects/nexus.ro/beta)
-	rsync -avz --delete ./ root@192.168.1.31:/home/projects/nexus.ro/beta/
-	ssh root@192.168.1.31 "cd /home/projects/nexus.ro/beta && docker compose up -d --build"
+deploy-beta: ## Deploy to beta (from DEPLOY_HOST_BETA / DEPLOY_PATH_BETA)
+	rsync -avz --delete ./ $(DEPLOY_USER_BETA)@$(DEPLOY_HOST_BETA):$(DEPLOY_PATH_BETA)/
+	ssh $(DEPLOY_USER_BETA)@$(DEPLOY_HOST_BETA) "cd $(DEPLOY_PATH_BETA) && docker compose --env-file .env up -d --build"
 
-deploy-stage: ## Deploy to staging (192.168.1.31:/home/projects/nexus.ro/stage)
-	rsync -avz --delete ./ root@192.168.1.31:/home/projects/nexus.ro/stage/
-	ssh root@192.168.1.31 "cd /home/projects/nexus.ro/stage && docker compose up -d --build"
+deploy-stage: ## Deploy to staging (from DEPLOY_HOST_STAGE / DEPLOY_PATH_STAGE)
+	rsync -avz --delete ./ $(DEPLOY_USER_STAGE)@$(DEPLOY_HOST_STAGE):$(DEPLOY_PATH_STAGE)/
+	ssh $(DEPLOY_USER_STAGE)@$(DEPLOY_HOST_STAGE) "cd $(DEPLOY_PATH_STAGE) && docker compose --env-file .env up -d --build"
 
-deploy-live: ## Deploy to production (192.168.1.30:/mnt/hdd/proiecte/nexus.ro/live)
-	rsync -avz --delete ./ root@192.168.1.30:/mnt/hdd/proiecte/nexus.ro/live/
-	ssh root@192.168.1.30 "cd /mnt/hdd/proiecte/nexus.ro/live && docker compose up -d --build"
+deploy-live: ## Deploy to production (from DEPLOY_HOST_LIVE / DEPLOY_PATH_LIVE)
+	rsync -avz --delete ./ $(DEPLOY_USER_LIVE)@$(DEPLOY_HOST_LIVE):$(DEPLOY_PATH_LIVE)/
+	ssh $(DEPLOY_USER_LIVE)@$(DEPLOY_HOST_LIVE) "cd $(DEPLOY_PATH_LIVE) && docker compose --env-file .env up -d --build"
 
 # ── Data ──
 
 backup-db: ## Backup PostgreSQL database locally
-	docker compose exec postgres pg_dump -U nexus nexus > backup_$$(date +%Y%m%d_%H%M%S).sql
+	docker compose exec postgres pg_dump -U $(POSTGRES_USER) $(POSTGRES_DB) > backup_$$(date +%Y%m%d_%H%M%S).sql
 
-restore-db: ## Restore PostgreSQL from backup (make restore-db FILE=backup_20260715.sql)
-	docker compose exec -T postgres psql -U nexus nexus < $(FILE)
+restore-db: ## Restore from backup (make restore-db FILE=backup_20260715.sql)
+	docker compose exec -T postgres psql -U $(POSTGRES_USER) $(POSTGRES_DB) < $(FILE)
