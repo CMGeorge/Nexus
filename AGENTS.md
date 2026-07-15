@@ -85,6 +85,7 @@ Features are decomposed into structured task-packets:
 - Contains: goal, acceptance criteria, estimated hours, dependencies
 - Created as Redmine child issues under the feature issue
 - Use `/task-packet` prompt to generate
+- Each task-packet maps to one or more user stories from `docs/user-stories.md`
 
 ### Contract-First API Design
 API endpoints follow contract-first development:

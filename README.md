@@ -236,6 +236,7 @@ See [ADR-0007](docs/adr/0007-security-architecture.md) and [ADR-0008](docs/adr/0
 |----------|----------|
 | ADRs | [docs/adr/](docs/adr/) |
 | API Contracts | [docs/contracts/](docs/contracts/) |
+| User Stories | [docs/user-stories.md](docs/user-stories.md) (59 stories, 10 domains) |
 | Agent Guidelines | [AGENTS.md](AGENTS.md) |
 | Agent Configurations | [.github/agents/](.github/agents/) |
 | Redmine | [#57 nexus-saas](https://redmine.wesell.ro/projects/nexus-saas) |
