@@ -20,9 +20,24 @@ argument-hint: "[task] Docker operation..."
 │  Traefik (reverse proxy) :80/:443       │
 │  ├── api (FastAPI) :8000                │
 │  │   ├── postgres :5432                 │
-│  │   └── redis :6│  │   └── redis :6│  │   └── redis :6│  │   └── redis :��── mailpit :│  │   └── redis :6│  │   └── redis :6│  │   └── redis :6│  │   └── redis :��── mailpit :│  │   └── redis :6│  │   └── redis :6│  │ice│  │   └── redis :6│  │  
+│  │   └── redis :6379                    │
+│  ├── pgadmin :5050                      │
+│  └── mailpit :8025 (UI) :1025 (SMTP)    │
+└─────────────────────────────────────────┘
+```
 
-# Start # Start # Start # Stdependency cha# Stardocker co# Start # Start # Start # Stdependency cha# Ste log# Start # Start # Start # Stdependency chae logs -f --tail=100   # All services, last 100 lines
+## Commands
+
+```sh
+# Start all services (from repo root)
+docker compose up -d
+
+# Start with rebuild (after dependency changes)
+docker compose up -d --build
+
+# View logs
+docker compose logs -f api          # API only
+docker compose logs -f --tail=100   # All services, last 100 lines
 
 # Stop everything
 docker compose down
@@ -46,8 +61,21 @@ docker stats
 ## Service Endpoints (Dev)
 
 | Service   | URL                       |
-|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--(no|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|--|`ap|--|--|--| on both|--|--|--|--nt variab|--|--|--|--|--|--|--|--|--|--|--|--|--|-ets)
-- Ports exposed only - Ports exposed only -ik ha- Ports exposed only - tion
+|-----------|---------------------------|
+| API       | http://localhost:3670      |
+| Swagger   | http://localhost:3670/docs |
+| pgAdmin   | http://localhost:3673      |
+| Mailpit   | http://localhost:3674      |
+| Redis     | localhost:3672             |
+| Postgres  | localhost:3671             |
+
+## docker-compose.yml Structure Rules
+- Root-level `docker-compose.yml` only (no per-submodule compose files)
+- Services: `api`, `postgres`, `redis`, `pgadmin`, `mailpit`
+- Use named volumes for persistent data (postgres_data, redis_data)
+- Health checks on `postgres` and `redis`; `api` depends on both
+- Environment variables from `.env` file (never hardcode secrets)
+- Ports exposed only for development; Traefik handles routing in production
 
 ## Troubleshooting
 
