@@ -198,6 +198,11 @@ make migrate                # Apply database migrations
 make up-build               # Rebuild and start
 make logs                   # Tail all service logs
 make down-clean             # Stop and reset database
+
+# Deploy
+make start-beta             # Deploy + start beta (rsync + docker compose up)
+make start-stage            # Deploy + start staging
+make restart-live           # Restart production (no rsync)
 ```
 
 All IPs, ports, and credentials are in `.env` — never committed to Git.
