@@ -119,9 +119,11 @@ The backend uses **Domain-Driven Design (DDD)** with bounded contexts — NOT Cl
 
 **Why DDD?** Multi-tenant SaaS has natural business boundaries (customers, invoices, appointments). DDD maps each to an independent bounded context. This means:
 - Tenant isolation is explicit at the architecture level, not buried in a repository layer
-- Each context can be extracted into a microservice without re-architecture
+- Each context can be extracted into a microservice without re-architecture (see [ADR-0009](docs/adr/0009-microservice-strategy.md))
 - Domain events handle cross-context communication (e.g., AppointmentCreated triggers Invoice)
 - Repository + Dependency Injection patterns are used *within* contexts, not as a separate layer
+
+**Microservice Path**: DDD's bounded contexts are the natural decomposition boundary for microservices. The platform follows a 4-phase migration: modular monolith → separate schemas → separate databases → full microservices on k3s.
 
 ```
 app/

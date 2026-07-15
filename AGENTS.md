@@ -14,6 +14,7 @@ Nexus/                  # This repo — only docker-compose, CI, shared config
 - Root-level changes are limited to: `docker-compose.yml`, `.github/workflows/`, `Makefile`, `.env.example`, shared tooling configs.
 - Multi-tenant: each company has isolated data. Tenant resolution via subdomain or header (`X-Tenant-ID`).
 - **Architecture pattern**: Domain-Driven Design (DDD) with bounded contexts, NOT Clean Architecture.
+- **Microservice-ready**: each bounded context can be extracted into an independent service with its own database (see ADR-0009).
 
 ### Why DDD, Not Clean Architecture
 
