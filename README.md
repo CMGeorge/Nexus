@@ -6,13 +6,13 @@ A production-ready multi-tenant SaaS platform for small businesses -- electricia
 
 ## Environments
 
-| Environment | Domain | Purpose |
-|-------------|--------|---------|
-| **Production** | [nexus.wesell.ro](https://nexus.wesell.ro) | Live customer-facing platform |
-| **Beta** | [nexus-beta.wesell.ro](https://nexus-beta.wesell.ro) | Pre-release testing, early adopters |
-| **Staging** | [nexus-stage.wesell.ro](https://nexus-stage.wesell.ro) | Integration testing, QA, demos |
+| Environment | Web App | API | Purpose |
+|-------------|---------|-----|---------|
+| **Production** | [nexus.wesell.ro](https://nexus.wesell.ro) | [api-nexus.wesell.ro](https://api-nexus.wesell.ro) | Live customer-facing platform |
+| **Beta** | [nexus-beta.wesell.ro](https://nexus-beta.wesell.ro) | [api-nexus-beta.wesell.ro](https://api-nexus-beta.wesell.ro) | Pre-release testing, early adopters |
+| **Staging** | [nexus-stage.wesell.ro](https://nexus-stage.wesell.ro) | [api-nexus-stage.wesell.ro](https://api-nexus-stage.wesell.ro) | Integration testing, QA, demos |
 
-Each tenant resolves via subdomain: `{company}.nexus.wesell.ro` (or beta/stage equivalent).
+Tenant subdomains: `{company}.nexus.wesell.ro` — API always at `api-nexus*.wesell.ro`.
 
 ## Architecture
 
