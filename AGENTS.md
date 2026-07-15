@@ -27,6 +27,22 @@ Nexus/                  # This repo — only docker-compose, CI, shared config
 - **Reverse proxy**: Traefik
 - **Project Management**: Redmine (project #57 nexus-saas at redmine.wesell.ro)
 
+### Redmine Structure
+Redmine mirrors the git submodule architecture with subprojects:
+
+```
+Nexus SaaS (#57)              # Parent: epics, cross-cutting features
+├── Backend API               # DDD modules as categories: Auth, Customers, Companies, etc.
+├── Admin Portal              # React/Vue frontend issues
+├── Mobile App                # iOS/Android issues
+├── Infrastructure            # Docker, Traefik, CI/CD, monitoring
+├── Documentation             # ADRs, contracts, architecture docs
+└── AI Engineering Playbook   # Agents, skills, prompts -- "how we build"
+```
+
+- DDD modules (Auth, Customers, Invoices, etc.) are **categories** within Backend API, not separate projects
+- Cross-cutting features create the epic in the parent project; task-packets go to the relevant subproject
+
 ## Development Practices
 
 ### Redmine Tracking
@@ -35,6 +51,8 @@ All work is tracked in Redmine project **#57 (nexus-saas)**. Every feature:
 - Is broken into task-packets (child issues for Design, Build, Test, Review, Secure phases)
 - Links commits via conventional commits: `feat(auth): add JWT refresh #123`
 - Is resolved when all task-packets are complete
+- Epics/cross-cutting features go in the parent project (#57)
+- Task-packets target the appropriate subproject (Backend API, Admin Portal, etc.)
 
 ### ADR (Architecture Decision Records)
 Significant architectural decisions are documented in `docs/adr/`:

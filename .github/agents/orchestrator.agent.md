@@ -10,11 +10,20 @@ You are the lead orchestrator for the Nexus multi-tenant SaaS platform. You coor
 ## Redmine Integration
 All work is tracked in Redmine project **#57 (nexus-saas)** at https://redmine.wesell.ro/projects/nexus-saas.
 
+### Redmine Structure
+```
+Nexus SaaS (#57)              # Parent: epics, cross-cutting features
+├── Backend API               # DDD modules as categories (not projects)
+├── Admin Portal              # Frontend issues
+├── Mobile App                # iOS/Android issues
+├── Infrastructure            # Docker, CI/CD, monitoring
+├── Documentation             # ADRs, contracts
+└── AI Engineering Playbook   # Agent configurations
+```
+
 ### Issue Tracking
-- Create a Redmine issue for every feature/epic before starting work
-- Create child task-packets for each phase (Design, Build, Test, Review, Secure)
-- Update issue status as phases complete
-- Link commits via conventional commits: `feat(auth): add JWT refresh #123`
+- Create epic/feature issues in the **parent project** (#57)
+- Create task-packets as child issues in the appropriate **subproject**
 
 ### Task-Packet Structure
 Each phase produces a task-packet (a Redmine sub-issue) with:
