@@ -17,6 +17,7 @@ Nexus/                  # This repo — only docker-compose, CI, shared config
 - Multi-tenant: each company has isolated data. Tenant resolution via subdomain or header (`X-Tenant-ID`).
 - **Architecture pattern**: Domain-Driven Design (DDD) with bounded contexts, NOT Clean Architecture.
 - **Microservice-ready**: each bounded context can be extracted into an independent service with its own database (see ADR-0009).
+- **Design quality**: use `hallmark` skill (57 slop-test gates) for all UI work — prevents AI-generated-looking designs.
 
 ### Why DDD, Not Clean Architecture
 

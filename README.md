@@ -125,6 +125,17 @@ Nexus uses 7 specialist AI agents coordinated by an orchestrator through a struc
 | 5. Secure | Security Auditor | RBAC, JWT, rate limiting, tenant isolation |
 | 6. Close | Orchestrator | Update Redmine, link task-packets |
 
+## Design Quality 🎨
+
+All UI work is filtered through **[Hallmark](https://github.com/Nutlope/hallmark)** — an anti-AI-slop design skill with **57 quality gates** that prevents AI-generated-looking interfaces. Hallmark ensures:
+- **Structural variety** — two pages for different briefs feel like different sites, not color-swaps
+- **20 themes** with distinct macrostructures (modern-minimal, atmospheric, editorial, etc.)
+- **Custom mode** for creative briefs that don't fit catalog themes
+- **Study verb** — extract design DNA from reference sites without pixel-cloning
+- **Audit verb** — score existing UI against anti-patterns
+
+Design follows the principle: *made, not generated*.
+
 ## Project Structure (DDD)
 
 The backend uses **Domain-Driven Design (DDD)** with bounded contexts — NOT Clean Architecture.
