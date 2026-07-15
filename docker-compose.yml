@@ -1,52 +1,8 @@
-# Nexus SaaS — Local Development Environment
-# All config from .env (copy .env.example → .env)
-# Internal services communicate via Docker network
+# Nexus SaaS — Base Services (deployable to all environments)
+# App services (api, frontend) are in docker-compose.dev.yml
+# All config from .env
 
 services:
-  api:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    image: nexus-api:latest
-    container_name: nexus-api
-    ports:
-      - "${PORT_API:-3670}:8000"
-    env_file:
-      - .env
-    environment:
-      - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER:-nexus}:${POSTGRES_PASSWORD:-nexus_dev}@postgres:5432/${POSTGRES_DB:-nexus}
-      - REDIS_URL=redis://redis:6379/0
-      - ENVIRONMENT=development
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    volumes:
-      - ./backend:/app:delegated
-      - nexus_uploads:/app/uploads
-    restart: unless-stopped
-    networks:
-      - nexus-net
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    image: nexus-frontend:latest
-    container_name: nexus-frontend
-    ports:
-      - "${PORT_FRONTEND:-3676}:3000"
-    environment:
-      - VITE_API_URL=http://localhost:${PORT_API:-3670}
-    depends_on:
-      - api
-    volumes:
-      - ./frontend:/app:delegated
-    restart: unless-stopped
-    networks:
-      - nexus-net
-
   postgres:
     image: postgres:16-alpine
     container_name: nexus-postgres
@@ -116,8 +72,6 @@ volumes:
   nexus_pgdata:
     driver: local
   nexus_redisdata:
-    driver: local
-  nexus_uploads:
     driver: local
 
 networks:

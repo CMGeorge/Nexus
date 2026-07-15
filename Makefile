@@ -11,11 +11,14 @@ help: ## Show this help
 
 # ── Docker ──
 
-up: ## Start all services
-	docker compose --env-file .env up -d
+up: ## Start all services (base + dev overlay)
+	docker compose -f docker-compose.yml -f docker-compose.dev.yml --env-file .env up -d
 
 up-build: ## Start all services with rebuild
-	docker compose --env-file .env up -d --build
+	docker compose -f docker-compose.yml -f docker-compose.dev.yml --env-file .env up -d --build
+
+up-base: ## Start infrastructure only (postgres, redis, pgadmin, mailpit)
+	docker compose --env-file .env up -d
 
 down: ## Stop all services
 	docker compose down

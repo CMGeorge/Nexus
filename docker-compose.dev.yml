@@ -1,0 +1,50 @@
+# Nexus SaaS — App Services Overlay (local development only)
+# Merge with docker-compose.yml: docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+# These require backend/ and frontend/ submodules to exist
+
+services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: nexus-api
+    ports:
+      - "${PORT_API:-3670}:8000"
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER:-nexus}:${POSTGRES_PASSWORD:-nexus_dev}@postgres:5432/${POSTGRES_DB:-nexus}
+      - REDIS_URL=redis://redis:6379/0
+      - ENVIRONMENT=development
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app:delegated
+      - nexus_uploads:/app/uploads
+    restart: unless-stopped
+    networks:
+      - nexus-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: nexus-frontend
+    ports:
+      - "${PORT_FRONTEND:-3676}:3000"
+    environment:
+      - VITE_API_URL=http://localhost:${PORT_API:-3670}
+    depends_on:
+      - api
+    volumes:
+      - ./frontend:/app:delegated
+    restart: unless-stopped
+    networks:
+      - nexus-net
+
+volumes:
+  nexus_uploads:
+    driver: local
