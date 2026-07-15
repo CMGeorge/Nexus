@@ -7,6 +7,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    image: nexus-api:latest
     container_name: nexus-api
     ports:
       - "${PORT_API:-3670}:8000"
@@ -32,6 +33,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+    image: nexus-frontend:latest
     container_name: nexus-frontend
     ports:
       - "${PORT_FRONTEND:-3676}:3000"

@@ -71,17 +71,17 @@ redis-shell: ## Open Redis CLI
 # ── Deploy ──
 # Uses DEPLOY_USER_* from .env; falls back to current user ($USER) if not set
 
-deploy-beta: ## Deploy to beta (rsync + rebuild + start)
-	rsync -avz --delete ./ $(or $(DEPLOY_USER_BETA),$$USER)@$(DEPLOY_HOST_BETA):$(DEPLOY_PATH_BETA)/
-	ssh $(or $(DEPLOY_USER_BETA),$$USER)@$(DEPLOY_HOST_BETA) "cd $(DEPLOY_PATH_BETA) && docker compose --env-file .env up -d --build"
+deploy-beta: ## Deploy to beta (rsync + pull + start)
+	rsync -avz --delete ./ $(or $(DEPLOY_USER_BETA),$$USER)@$(DEPLOY_HOST_BETA):$(DEPLOY_PATH_BETA) --exclude='backend/' --exclude='frontend/' --exclude='mobile/' --exclude='.git/'
+	ssh $(or $(DEPLOY_USER_BETA),$$USER)@$(DEPLOY_HOST_BETA) "cd $(DEPLOY_PATH_BETA) && docker compose --env-file .env pull && docker compose --env-file .env up -d"
 
-deploy-stage: ## Deploy to staging (rsync + rebuild + start)
-	rsync -avz --delete ./ $(or $(DEPLOY_USER_STAGE),$$USER)@$(DEPLOY_HOST_STAGE):$(DEPLOY_PATH_STAGE)/
-	ssh $(or $(DEPLOY_USER_STAGE),$$USER)@$(DEPLOY_HOST_STAGE) "cd $(DEPLOY_PATH_STAGE) && docker compose --env-file .env up -d --build"
+deploy-stage: ## Deploy to staging (rsync + pull + start)
+	rsync -avz --delete ./ $(or $(DEPLOY_USER_STAGE),$$USER)@$(DEPLOY_HOST_STAGE):$(DEPLOY_PATH_STAGE) --exclude='backend/' --exclude='frontend/' --exclude='mobile/' --exclude='.git/'
+	ssh $(or $(DEPLOY_USER_STAGE),$$USER)@$(DEPLOY_HOST_STAGE) "cd $(DEPLOY_PATH_STAGE) && docker compose --env-file .env pull && docker compose --env-file .env up -d"
 
-deploy-live: ## Deploy to production (rsync + rebuild + start)
-	rsync -avz --delete ./ $(or $(DEPLOY_USER_LIVE),$$USER)@$(DEPLOY_HOST_LIVE):$(DEPLOY_PATH_LIVE)/
-	ssh $(or $(DEPLOY_USER_LIVE),$$USER)@$(DEPLOY_HOST_LIVE) "cd $(DEPLOY_PATH_LIVE) && docker compose --env-file .env up -d --build"
+deploy-live: ## Deploy to production (rsync + pull + start)
+	rsync -avz --delete ./ $(or $(DEPLOY_USER_LIVE),$$USER)@$(DEPLOY_HOST_LIVE):$(DEPLOY_PATH_LIVE) --exclude='backend/' --exclude='frontend/' --exclude='mobile/' --exclude='.git/'
+	ssh $(or $(DEPLOY_USER_LIVE),$$USER)@$(DEPLOY_HOST_LIVE) "cd $(DEPLOY_PATH_LIVE) && docker compose --env-file .env pull && docker compose --env-file .env up -d"
 
 start-beta: deploy-beta ## Alias: deploy + start beta
 start-stage: deploy-stage ## Alias: deploy + start staging
