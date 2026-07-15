@@ -1,6 +1,6 @@
-# Nexus SaaS — App Services Overlay (local development only)
-# Merge with docker-compose.yml: docker compose -f docker-compose.yml -f docker-compose.dev.yml up
-# These require backend/ and frontend/ submodules to exist
+# Nexus SaaS — Development Overlay (local only, NEVER deploy to remote)
+# Exposes dev ports (367x), mounts source volumes for hot-reload, adds api + frontend
+# Merge: docker compose -f docker-compose.yml -f docker-compose.dev.yml up
 
 services:
   api:
@@ -44,6 +44,24 @@ services:
     restart: unless-stopped
     networks:
       - nexus-net
+
+  # Override base services — expose dev ports for local tooling
+  postgres:
+    ports:
+      - "${PORT_POSTGRES:-3671}:5432"
+
+  redis:
+    ports:
+      - "${PORT_REDIS:-3672}:6379"
+
+  pgadmin:
+    ports:
+      - "${PORT_PGADMIN:-3673}:80"
+
+  mailpit:
+    ports:
+      - "${PORT_MAILPIT_UI:-3674}:8025"
+      - "${PORT_MAILPIT_SMTP:-3675}:1025"
 
 volumes:
   nexus_uploads:

@@ -1,13 +1,12 @@
 # Nexus SaaS — Base Services (deployable to all environments)
-# App services (api, frontend) are in docker-compose.dev.yml
+# No exposed ports — all communication via internal Docker network
+# Dev ports (367x) are in docker-compose.dev.yml
 # All config from .env
 
 services:
   postgres:
     image: postgres:16-alpine
     container_name: nexus-postgres
-    ports:
-      - "${PORT_POSTGRES:-3671}:5432"
     env_file:
       - .env
     environment:
@@ -28,8 +27,6 @@ services:
   redis:
     image: redis:7-alpine
     container_name: nexus-redis
-    ports:
-      - "${PORT_REDIS:-3672}:6379"
     volumes:
       - nexus_redisdata:/data
     healthcheck:
@@ -44,8 +41,6 @@ services:
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: nexus-pgadmin
-    ports:
-      - "${PORT_PGADMIN:-3673}:80"
     env_file:
       - .env
     environment:
@@ -61,9 +56,6 @@ services:
   mailpit:
     image: axllent/mailpit:latest
     container_name: nexus-mailpit
-    ports:
-      - "${PORT_MAILPIT_UI:-3674}:8025"
-      - "${PORT_MAILPIT_SMTP:-3675}:1025"
     restart: unless-stopped
     networks:
       - nexus-net
