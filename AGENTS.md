@@ -1,5 +1,7 @@
 # Nexus - Agent Guidelines
 
+> Created by **WeSell.Solutions** — https://wesell.solutions
+
 ## Architecture
 Meta-repository for a multi-tenant SaaS platform. **Each component is a git submodule:**
 

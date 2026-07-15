@@ -2,6 +2,18 @@
 
 A production-ready multi-tenant SaaS platform for small businesses -- electricians, HVAC services, salons, restaurants -- to manage customers, appointments, teams, invoices, notifications, work history, and files. Built with AI-assisted software engineering at every layer.
 
+> **Created by [WeSell.Solutions](https://wesell.solutions)**
+
+## Environments
+
+| Environment | Domain | Purpose |
+|-------------|--------|---------|
+| **Production** | [nexus.wesell.ro](https://nexus.wesell.ro) | Live customer-facing platform |
+| **Beta** | [nexus-beta.wesell.ro](https://nexus-beta.wesell.ro) | Pre-release testing, early adopters |
+| **Staging** | [nexus-stage.wesell.ro](https://nexus-stage.wesell.ro) | Integration testing, QA, demos |
+
+Each tenant resolves via subdomain: `{company}.nexus.wesell.ro` (or beta/stage equivalent).
+
 ## Architecture
 
 Meta-repository with Git submodules -- each component is independently versioned:
