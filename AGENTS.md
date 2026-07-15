@@ -13,6 +13,20 @@ Nexus/                  # This repo — only docker-compose, CI, shared config
 - Never create application code at the root level. Always work inside the correct submodule.
 - Root-level changes are limited to: `docker-compose.yml`, `.github/workflows/`, `Makefile`, `.env.example`, shared tooling configs.
 - Multi-tenant: each company has isolated data. Tenant resolution via subdomain or header (`X-Tenant-ID`).
+- **Architecture pattern**: Domain-Driven Design (DDD) with bounded contexts, NOT Clean Architecture.
+
+### Why DDD, Not Clean Architecture
+
+| | Clean Architecture | DDD (our choice) |
+|---|---|---|
+| **Organized by** | Technical layers (entities → use cases → adapters → frameworks) | Business domains (auth, customers, invoices, etc.) |
+| **Best for** | Single-domain apps with deep business rules | Multi-domain SaaS with cross-context communication |
+| **Multi-tenant** | Tenant logic scattered across layers | Tenant boundary is a first-class context (companies/) |
+| **Microservice path** | Requires re-architecture | Each bounded context can be extracted independently |
+| **Team alignment** | Teams organized by layer (backend team, frontend team) | Teams own entire contexts (auth team, billing team) |
+| **Cross-cutting** | Difficult — spans all layers | Domain events for cross-context communication |
+
+Clean Architecture creates unnecessary indirection for a multi-domain SaaS. DDD's bounded contexts map directly to business capabilities and make tenant isolation explicit at the architecture level.
 
 ## Tech Stack
 - **Backend**: Python 3.12+, FastAPI, SQLAlchemy 2.0 (async), Alembic, Pydantic v2

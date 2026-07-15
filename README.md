@@ -115,11 +115,17 @@ Nexus uses 7 specialist AI agents coordinated by an orchestrator through a struc
 
 ## Project Structure (DDD)
 
-The backend is organized by bounded context, not technical layer:
+The backend uses **Domain-Driven Design (DDD)** with bounded contexts — NOT Clean Architecture.
+
+**Why DDD?** Multi-tenant SaaS has natural business boundaries (customers, invoices, appointments). DDD maps each to an independent bounded context. This means:
+- Tenant isolation is explicit at the architecture level, not buried in a repository layer
+- Each context can be extracted into a microservice without re-architecture
+- Domain events handle cross-context communication (e.g., AppointmentCreated triggers Invoice)
+- Repository + Dependency Injection patterns are used *within* contexts, not as a separate layer
 
 ```
 app/
-├── auth/           # JWT, refresh tokens, password hashing
+├── auth/           # JWT, refresh tokens, password hashing, MFA
 ├── customers/      # Customer CRUD, search, history
 ├── companies/      # Tenant settings, branding, subscription
 ├── appointments/   # Scheduling, calendar, reminders
@@ -128,8 +134,10 @@ app/
 ├── users/          # User management, roles, permissions
 ├── notifications/  # Email, SMS, push templates
 ├── files/          # Upload, storage, thumbnails
-└── core/           # Shared: config, deps, middleware
+└── core/           # Shared: config, deps, middleware, base models
 ```
+
+Each context contains: `models.py`, `schemas.py`, `router.py`, `service.py`, `repository.py`, `deps.py`
 
 ## Redmine
 
