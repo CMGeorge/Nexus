@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+*.egg
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker-compose.override.yml
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+.pytest_cache/
+
+# Submodules (tracked separately)
+/backend/
+/frontend/
+/mobile/
+
+# Node (frontend submodule)
+node_modules/
+.next/
+dist/
+
+# iOS (mobile submodule)
+*.xcworkspace
+xcuserdata/
+Pods/

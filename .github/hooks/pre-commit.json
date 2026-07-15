@@ -1,0 +1,11 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "type": "command",
+        "command": "python3 -c \"import json, sys; data = json.load(sys.stdin); tool = data.get('tool_name', ''); ti = data.get('tool_input', {}); fp = ti.get('filePath', ''); result = 'allow' if not (tool in ('replace_string_in_file', 'multi_replace_string_in_file') and '/backend/' in fp and fp.endswith('.py')) else 'allow'; print(json.dumps({'hookSpecificOutput': {'hookEventName': 'PreToolUse', 'permissionDecision': result, 'permissionDecisionReason': 'Python file in backend - ensure ruff + mypy pass after edit' if result == 'allow' else 'Blocked'}}))\"",
+        "timeout": 5
+      }
+    ]
+  }
+}

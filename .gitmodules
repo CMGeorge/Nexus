@@ -1,0 +1,9 @@
+[submodule "backend"]
+path = backend
+url = https://github.com/cmgeorge/nexus-backend.git
+[submodule "frontend"]
+path = frontend
+url = https://github.com/cmgeorge/nexus-frontend.git
+[submodule "mobile"]
+path = mobile
+url = https://github.com/cmgeorge/nexus-mobile.git
