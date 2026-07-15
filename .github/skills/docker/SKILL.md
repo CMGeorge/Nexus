@@ -20,7 +20,7 @@ argument-hint: "[task] Docker operation..."
 │  Traefik (reverse proxy) :80/:443       │
 │  ├── api (FastAPI) :8000                │
 │  │   ├── postgres :5432                 │
-│  │   └── redis :6│  │   └── redis :6│  │   └── redis :6│  │   └── redis :��── mailpit :│  │   └── redis :6│  │   └── redis :6│  │   └── redis :6│  │   └── redis :��── mailpit :│  │   └── redis :6│  │   └── redis :6│  │ice│  │   └── redis :6│  │  
+│  │   └── redis :6│  │   └── redis :6│  │   └── redis :6│  │   └── redis :��── mailpit :│  │   └── redis :6│  │   └── redis :6│  │   └── redis :6│  │   └── redis :��── mailpit :│  │   └── redis :6│  │   └── redis :6│  │ice│  │   └── redis :6│  │  
 
 # Start # Start # Start # Stdependency cha# Stardocker co# Start # Start # Start # Stdependency cha# Ste log# Start # Start # Start # Stdependency chae logs -f --tail=100   # All services, last 100 lines
 

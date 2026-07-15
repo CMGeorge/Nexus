@@ -6,13 +6,14 @@ A production-ready multi-tenant SaaS platform for small businesses -- electricia
 
 ## Environments
 
-| Environment | Web App | API | Purpose |
-|-------------|---------|-----|---------|
-| **Production** | [nexus.wesell.ro](https://nexus.wesell.ro) | [api-nexus.wesell.ro](https://api-nexus.wesell.ro) | Live customer-facing platform |
-| **Beta** | [nexus-beta.wesell.ro](https://nexus-beta.wesell.ro) | [api-nexus-beta.wesell.ro](https://api-nexus-beta.wesell.ro) | Pre-release testing, early adopters |
-| **Staging** | [nexus-stage.wesell.ro](https://nexus-stage.wesell.ro) | [api-nexus-stage.wesell.ro](https://api-nexus-stage.wesell.ro) | Integration testing, QA, demos |
+| Environment | Web App | API | Server | Path | Ports |
+|-------------|---------|-----|--------|------|-------|
+| **Development** | localhost:3676 | localhost:3670 | local | — | 3670-3679 |
+| **Beta** | nexus-beta.wesell.ro | api-nexus-beta.wesell.ro | 192.168.1.31 | /home/projects/nexus.ro/beta | standard |
+| **Staging** | nexus-stage.wesell.ro | api-nexus-stage.wesell.ro | 192.168.1.31 | /home/projects/nexus.ro/stage | standard |
+| **Production** | nexus.wesell.ro | api-nexus.wesell.ro | 192.168.1.30 | /mnt/hdd/proiecte/nexus.ro/live | standard |
 
-Tenant subdomains: `{company}.nexus.wesell.ro` — API always at `api-nexus*.wesell.ro`.
+Local development uses ports **367x** to avoid conflicts. Internal Docker services communicate on standard ports within the `nexus-net` network.
 
 ## Architecture
 
@@ -181,15 +182,32 @@ Nexus SaaS (#57)
 ## Build & Test
 
 ```sh
-# Install dependencies
-cd backend && uv sync
+# Quick start
+make up          # Start all services (ports 3670-3679)
+make install     # Install backend dependencies
 
-# Run all checks
-uv run ruff check . && uv run mypy . && uv run pytest -v --cov=app --cov-report=term-missing
+# Development workflow
+make check       # ruff + mypy + pytest (all in one)
+make test        # Run tests with coverage
+make migrate     # Apply database migrations
 
 # Docker
-docker compose up --build
+make up-build    # Rebuild and start
+make logs        # Tail all service logs
+make down-clean  # Stop and reset database
 ```
+
+### Local Port Map
+
+| Service | Port | URL |
+|---------|------|-----|
+| API (Swagger) | 3670 | http://localhost:3670/docs |
+| PostgreSQL | 3671 | localhost:3671 |
+| Redis | 3672 | localhost:3672 |
+| pgAdmin | 3673 | http://localhost:3673 |
+| Mailpit UI | 3674 | http://localhost:3674 |
+| Mailpit SMTP | 3675 | localhost:3675 |
+| Frontend | 3676 | http://localhost:3676 |
 
 ## Security 🔐
 
