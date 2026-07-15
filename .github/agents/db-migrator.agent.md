@@ -18,12 +18,22 @@ You are an Alembic migration specialist for the Nexus platform. Your job is to c
 1. Review the model changes in `backend/app/**/models.py`
 2. Run `cd backend && uv run alembic revision --autogenerate -m "description"`
 3. Read and review the generated migration in `backend/alembic/versions/`
-4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4n logi4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4n logi4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Vuu4. Ve4. Ve4. Ve4. Ve4. Ve4. V", sa.Uuid(), sa.Foreig4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve=False4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4n logi4. Ve4. Ve4. Ve4. Ve4. Ve4. Vme(timezone=True),4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve4. Ve
+4. Verify: all new columns have correct types, nullable settings, and defaults
+5. Verify: foreign keys have corresponding indexes
+6. Verify: every new table has `id` (UUID), `created_at`, `updated_at` columns
+7. Verify: every table includes `tenant_id` (UUID, FK → companies, indexed)
+8. Add audit log triggers if the table requires audit logging
+9. Apply: `cd backend && uv run alembic upgrade head`
+
 ### Review Checklist
 - [ ] `upgrade()` and `downgrade()` are symmetric
 - [ ] Foreign keys have indexes
-- [ ] No data loss i- [ ] No data loss i- [ ] No data loss i- [ ] No data loss i- [ ] No data def- [ ] No daten_- [ ] No data loss i- ime- [ ] No data loss i- [ ] No data loss i- [ ] No data lods- [ ] No data loss i- [ ] No data loss i- [ ] No data loss i- [ ] No data lo>`
-- [ ] No data loss i- [ ] No data loss i- [ ] No data loss i- [ ] No dns)
+- [ ] No data loss in `upgrade()` (no DROP COLUMN without confirmation)
+- [ ] New columns use appropriate types: UUID for IDs, TIMESTAMPTZ for timestamps
+- [ ] Default values are database-safe (server_default for timestamps)
+- [ ] All tables include `id`, `created_at`, `updated_at`
+- [ ] Migration is reversible: `uv run alembic downgrade -1` succeeds
+- [ ] No raw SQL in migration (use SQLAlchemy operations)
 - Rollback: `uv run alembic downgrade -1`
 
 ## Output Format

@@ -96,6 +96,8 @@ See [docs/adr/](docs/adr/) for the full Architecture Decision Records:
 - [ADR-0004](docs/adr/0004-backup-strategy.md): Backup Strategy
 - [ADR-0005](docs/adr/0005-file-storage-ha.md): File Storage HA
 - [ADR-0006](docs/adr/0006-disaster-recovery-runbook.md): Disaster Recovery Runbook
+- [ADR-0007](docs/adr/0007-security-architecture.md): Security Architecture — API Gateway, JWT, Rate Limiting, MFA
+- [ADR-0008](docs/adr/0008-multi-factor-authentication.md): Multi-Factor Authentication — TOTP, Enrollment, Backup Codes
 
 ## AI-Driven Development
 
@@ -155,6 +157,45 @@ uv run ruff check . && uv run mypy . && uv run pytest -v --cov=app --cov-report=
 # Docker
 docker compose up --build
 ```
+
+## Security 🔐
+
+Nexus implements defense-in-depth across all layers, aligned with the OWASP API Security Top-10.
+
+### Authentication & Authorization
+| Control | Implementation |
+|---|---|
+| **Authentication** | JWT: access tokens (15 min) + refresh tokens (7 days) with rotation and Redis blacklisting |
+| **Multi-Factor Auth** | TOTP (RFC 6238) primary, email OTP fallback, backup codes, remember-device (30 days) |
+| **Role-Based Access** | Four roles (Admin, Manager, Employee, Customer) embedded in JWT claims |
+| **Tenant Isolation** | Every query filtered by `tenant_id` — zero cross-tenant data access |
+| **Password Policy** | bcrypt hashing, minimum 12 characters, complexity enforcement |
+
+### Attack Surface Protection
+| Control | Implementation |
+|---|---|
+| **API Gateway** | Traefik reverse proxy — single entry point, frontend never touches the database |
+| **Rate Limiting** | Redis sliding window: per-tenant + per-endpoint, tiered by subscription |
+| **SQL Injection** | SQLAlchemy 2.0 ORM exclusively — parameterized queries, no raw SQL |
+| **Input Validation** | Pydantic v2 strict mode on all request/response schemas |
+| **CORS & Headers** | Traefik middleware: HSTS, CSP, X-Content-Type-Options, X-Frame-Options |
+| **HTTPS** | Traefik TLS termination, Let's Encrypt auto-renewal, TLS 1.2+ only |
+| **Secrets** | Docker secrets / environment variables — never in code, config, or logs |
+
+### Rate Limiting Tiers
+| Tier | Auth Endpoints | CRUD Endpoints | File Uploads |
+|---|---|---|---|
+| Free | 30 req/min | 200 req/min | 10 req/min |
+| Pro | 100 req/min | 1,000 req/min | 50 req/min |
+| Enterprise | 300 req/min | 5,000 req/min | 200 req/min |
+
+### Audit & Compliance
+- **Audit Logging**: Every mutation writes to `audit_logs` (who, what, when, old/new values)
+- **Error Handling**: RFC 7807 Problem Details — no stack traces in production
+- **Dependency Scanning**: GitHub Dependabot + `uv lock --check` in CI
+- **Observability**: Prometheus metrics, Grafana dashboards, Sentry error tracking
+
+See [ADR-0007](docs/adr/0007-security-architecture.md) and [ADR-0008](docs/adr/0008-multi-factor-authentication.md) for full security architecture decisions.
 
 ## Documentation
 

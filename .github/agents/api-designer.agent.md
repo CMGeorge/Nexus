@@ -135,8 +135,18 @@ async def create_{resource}(
 ## Standard Error Responses (RFC 7807)
 | Code | When | Response Body |
 |------|------|---------------|
-| 400 | Validation error | `{"type": "...", "title": "Validation Error", "detail": "...", "status": 400}` |
-| 401 | Missing/invalid token | `{"type": "...| 401 | Missing/invalid token | `{"type"1}| 401 | Missing/invalid token | `{| 401 | Missing/invalid token | `{"t "| 401 | Missing/invalid token | `{"ty found | `{"type": "...", "title": "Not Found", "detail": "| 401 | Missing/invalid token | `{"type": "...| 4Co| 401 | Missing/invalid token | `{"type": le|: "Conflict", "status": 409}` |
-| 422 | Business rule violation | `{"type": "...", "title": "| 422 | Business rule violation | `{"type": "...", "title": "| 422 | Business rule viola: | 422 | Business rule violus"| 422 | Business rule vi- [ | 422 | Business rule violation | `{"type": "..."}.| 422 | Business rule violation | `{"type": "...", R| 422 | Business rule violation | `{"type"
---[ --[ --[ --[ --[ --[ --[ --[ --[ --[ --[ --[ --[ --[ --[ --[ --[ th returns RFC 7807 response
+| 400 | Validation error | `{"type": "https://api.nexus.app/errors/validation", "title": "Validation Error", "detail": "...", "status": 400}` |
+| 401 | Missing/invalid token | `{"type": "https://api.nexus.app/errors/unauthorized", "title": "Unauthorized", "detail": "Valid authentication required", "status": 401}` |
+| 403 | Insufficient role | `{"type": "https://api.nexus.app/errors/forbidden", "title": "Forbidden", "detail": "Insufficient permissions", "status": 403}` |
+| 404 | Resource not found | `{"type": "https://api.nexus.app/errors/not-found", "title": "Not Found", "detail": "Resource not found in your tenant", "status": 404}` |
+| 409 | Conflict (duplicate) | `{"type": "https://api.nexus.app/errors/conflict", "title": "Conflict", "detail": "Resource already exists", "status": 409}` |
+| 422 | Business rule violation | `{"type": "https://api.nexus.app/errors/unprocessable", "title": "Unprocessable Entity", "detail": "Business rule violated", "status": 422}` |
+| 429 | Rate limited | `{"type": "https://api.nexus.app/errors/rate-limited", "title": "Too Many Requests", "detail": "Rate limit exceeded", "status": 429}` |
+
+## Checklist
+- [ ] Contract YAML written in docs/contracts/{domain}.yaml
+- [ ] All endpoints filter by tenant_id
+- [ ] Response schemas use from_attributes = True
+- [ ] Query parameters have min/max constraints
+- [ ] Every error path returns RFC 7807 response
 - [ ] Router registered in app/main.py
