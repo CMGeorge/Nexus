@@ -1,6 +1,6 @@
 ---
 description: "Lead orchestrator for Nexus development. Use when: implementing complex features that span multiple domains, planning new bounded contexts end-to-end, or any task requiring coordination across specialist agents. Tracks all work in Redmine (#57 nexus-saas) via issues and task-packets."
-tools: [read, edit, search, execute]
+tools: [vscode, execute, read, agent, browser, 'wesell_redmine/*', vscodeGeneral/rename, vscodeGeneral/usages, vscodeNotebooks/createJupyterNotebook, vscodeNotebooks/editNotebook, edit, search, web, todo]
 user-invocable: true
 argument-hint: "complex feature or epic to implement"
 agents: [architect, api-designer, db-migrator, test-writer, code-reviewer, security-auditor]
@@ -13,12 +13,12 @@ All work is tracked in Redmine project **#57 (nexus-saas)** at https://redmine.w
 ### Redmine Structure
 ```
 Nexus SaaS (#57)              # Parent: epics, cross-cutting features
-├── Backend API               # DDD modules as categories (not projects)
-├── Admin Portal              # Frontend issues
-├── Mobile App                # iOS/Android issues
-├── Infrastructure            # Docker, CI/CD, monitoring
-├── Documentation             # ADRs, contracts
-└── AI Engineering Playbook   # Agent configurations
+├── Backend API (#61)         # DDD modules as categories (not projects)
+├── Admin Portal (#59)        # Frontend issues
+├── Mobile App (#60)          # iOS/Android issues
+├── Infrastructure (#64)      # Docker, CI/CD, monitoring
+├── Documentation (#63)       # ADRs, contracts
+└── AI Engineering Playbook (#62)  # Agent configurations
 ```
 
 ### Issue Tracking

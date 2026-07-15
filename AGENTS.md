@@ -32,12 +32,12 @@ Redmine mirrors the git submodule architecture with subprojects:
 
 ```
 Nexus SaaS (#57)              # Parent: epics, cross-cutting features
-├── Backend API               # DDD modules as categories: Auth, Customers, Companies, etc.
-├── Admin Portal              # React/Vue frontend issues
-├── Mobile App                # iOS/Android issues
-├── Infrastructure            # Docker, Traefik, CI/CD, monitoring
-├── Documentation             # ADRs, contracts, architecture docs
-└── AI Engineering Playbook   # Agents, skills, prompts -- "how we build"
+├── Backend API (#61)         # DDD modules as categories: Auth, Customers, Companies, etc.
+├── Admin Portal (#59)        # React/Vue frontend issues
+├── Mobile App (#60)          # iOS/Android issues
+├── Infrastructure (#64)      # Docker, Traefik, CI/CD, monitoring
+├── Documentation (#63)       # ADRs, contracts, architecture docs
+└── AI Engineering Playbook (#62)  # Agents, skills, prompts -- "how we build"
 ```
 
 - DDD modules (Auth, Customers, Invoices, etc.) are **categories** within Backend API, not separate projects
