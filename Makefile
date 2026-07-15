@@ -69,40 +69,41 @@ redis-shell: ## Open Redis CLI
 	docker compose exec redis redis-cli
 
 # ── Deploy ──
+# Uses DEPLOY_USER_* from .env; falls back to current user ($USER) if not set
 
 deploy-beta: ## Deploy to beta (rsync + rebuild + start)
-	rsync -avz --delete ./ $(DEPLOY_USER_BETA)@$(DEPLOY_HOST_BETA):$(DEPLOY_PATH_BETA)/
-	ssh $(DEPLOY_USER_BETA)@$(DEPLOY_HOST_BETA) "cd $(DEPLOY_PATH_BETA) && docker compose --env-file .env up -d --build"
+	rsync -avz --delete ./ $(or $(DEPLOY_USER_BETA),$$USER)@$(DEPLOY_HOST_BETA):$(DEPLOY_PATH_BETA)/
+	ssh $(or $(DEPLOY_USER_BETA),$$USER)@$(DEPLOY_HOST_BETA) "cd $(DEPLOY_PATH_BETA) && docker compose --env-file .env up -d --build"
 
 deploy-stage: ## Deploy to staging (rsync + rebuild + start)
-	rsync -avz --delete ./ $(DEPLOY_USER_STAGE)@$(DEPLOY_HOST_STAGE):$(DEPLOY_PATH_STAGE)/
-	ssh $(DEPLOY_USER_STAGE)@$(DEPLOY_HOST_STAGE) "cd $(DEPLOY_PATH_STAGE) && docker compose --env-file .env up -d --build"
+	rsync -avz --delete ./ $(or $(DEPLOY_USER_STAGE),$$USER)@$(DEPLOY_HOST_STAGE):$(DEPLOY_PATH_STAGE)/
+	ssh $(or $(DEPLOY_USER_STAGE),$$USER)@$(DEPLOY_HOST_STAGE) "cd $(DEPLOY_PATH_STAGE) && docker compose --env-file .env up -d --build"
 
 deploy-live: ## Deploy to production (rsync + rebuild + start)
-	rsync -avz --delete ./ $(DEPLOY_USER_LIVE)@$(DEPLOY_HOST_LIVE):$(DEPLOY_PATH_LIVE)/
-	ssh $(DEPLOY_USER_LIVE)@$(DEPLOY_HOST_LIVE) "cd $(DEPLOY_PATH_LIVE) && docker compose --env-file .env up -d --build"
+	rsync -avz --delete ./ $(or $(DEPLOY_USER_LIVE),$$USER)@$(DEPLOY_HOST_LIVE):$(DEPLOY_PATH_LIVE)/
+	ssh $(or $(DEPLOY_USER_LIVE),$$USER)@$(DEPLOY_HOST_LIVE) "cd $(DEPLOY_PATH_LIVE) && docker compose --env-file .env up -d --build"
 
 start-beta: deploy-beta ## Alias: deploy + start beta
 start-stage: deploy-stage ## Alias: deploy + start staging
 start-live: deploy-live ## Alias: deploy + start production
 
 restart-beta: ## Restart beta containers (no rsync)
-	ssh $(DEPLOY_USER_BETA)@$(DEPLOY_HOST_BETA) "cd $(DEPLOY_PATH_BETA) && docker compose --env-file .env restart"
+	ssh $(or $(DEPLOY_USER_BETA),$$USER)@$(DEPLOY_HOST_BETA) "cd $(DEPLOY_PATH_BETA) && docker compose --env-file .env restart"
 
 restart-stage: ## Restart staging containers (no rsync)
-	ssh $(DEPLOY_USER_STAGE)@$(DEPLOY_HOST_STAGE) "cd $(DEPLOY_PATH_STAGE) && docker compose --env-file .env restart"
+	ssh $(or $(DEPLOY_USER_STAGE),$$USER)@$(DEPLOY_HOST_STAGE) "cd $(DEPLOY_PATH_STAGE) && docker compose --env-file .env restart"
 
 restart-live: ## Restart production containers (no rsync)
-	ssh $(DEPLOY_USER_LIVE)@$(DEPLOY_HOST_LIVE) "cd $(DEPLOY_PATH_LIVE) && docker compose --env-file .env restart"
+	ssh $(or $(DEPLOY_USER_LIVE),$$USER)@$(DEPLOY_HOST_LIVE) "cd $(DEPLOY_PATH_LIVE) && docker compose --env-file .env restart"
 
 stop-beta: ## Stop beta containers
-	ssh $(DEPLOY_USER_BETA)@$(DEPLOY_HOST_BETA) "cd $(DEPLOY_PATH_BETA) && docker compose down"
+	ssh $(or $(DEPLOY_USER_BETA),$$USER)@$(DEPLOY_HOST_BETA) "cd $(DEPLOY_PATH_BETA) && docker compose down"
 
 stop-stage: ## Stop staging containers
-	ssh $(DEPLOY_USER_STAGE)@$(DEPLOY_HOST_STAGE) "cd $(DEPLOY_PATH_STAGE) && docker compose down"
+	ssh $(or $(DEPLOY_USER_STAGE),$$USER)@$(DEPLOY_HOST_STAGE) "cd $(DEPLOY_PATH_STAGE) && docker compose down"
 
 stop-live: ## Stop production containers
-	ssh $(DEPLOY_USER_LIVE)@$(DEPLOY_HOST_LIVE) "cd $(DEPLOY_PATH_LIVE) && docker compose down"
+	ssh $(or $(DEPLOY_USER_LIVE),$$USER)@$(DEPLOY_HOST_LIVE) "cd $(DEPLOY_PATH_LIVE) && docker compose down"
 
 # ── Data ──
 
