@@ -10,11 +10,20 @@ All IPs, paths, ports, and credentials are defined in `.env` (never committed). 
 
 | Environment | Web App | API | Server | Path |
 |-------------|---------|-----|--------|------|
-| **Development** | localhost:${PORT_FRONTEND} | localhost:${PORT_API} | local | — |
-| **Mock (Beta Preview)** | mock-nexus.wesell.ro | — | ${DEPLOY_HOST_BETA} | ${DEPLOY_PATH_BETA} |
+| **Development** | localhost:3701 | localhost:${PORT_API} | local | — |
+| **Mock — Main App** | mock-nexus.wesell.ro | — | ${DEPLOY_HOST_BETA} | ${DEPLOY_PATH_BETA} |
+| **Mock — Client Portal** | client-mock-nexus.wesell.ro | — | ${DEPLOY_HOST_BETA} | ${DEPLOY_PATH_BETA} |
+| **Mock — Admin Panel** | admin-mock-nexus.wesell.ro | — | ${DEPLOY_HOST_BETA} | ${DEPLOY_PATH_BETA} |
 | **Beta** | nexus-beta.wesell.ro | api-nexus-beta.wesell.ro | ${DEPLOY_HOST_BETA} | ${DEPLOY_PATH_BETA} |
 | **Staging** | nexus-stage.wesell.ro | api-nexus-stage.wesell.ro | ${DEPLOY_HOST_STAGE} | ${DEPLOY_PATH_STAGE} |
 | **Production** | nexus.wesell.ro | api-nexus.wesell.ro | ${DEPLOY_HOST_LIVE} | ${DEPLOY_PATH_LIVE} |
+
+**Mock Testing URLs (local dev):**
+| Mock | URL | Port | Docker Service |
+|------|-----|------|---------------|
+| Main App (business management) | http://localhost:3701 | `${PORT_MOCK:-3701}` | `mock` |
+| Client Portal (customer self-service) | http://localhost:3702 | `${PORT_CLIENT_PORTAL:-3702}` | `client-portal` |
+| Admin Panel (WeSell platform management) | http://localhost:3703 | `${PORT_ADMIN_PANEL:-3703}` | `admin-panel` |
 
 See `.env.example` for all 30+ configurable variables including ports, credentials, rate limits, and deploy targets.
 
@@ -27,7 +36,10 @@ Nexus/
 ├── backend/          # FastAPI + PostgreSQL + Redis (DDD)
 ├── frontend/         # Admin web UI (React/Vue) — TBD
 ├── desktop/          # Qt/QML desktop app (MVVM, C++17)
-├── mock/             # Static HTML mock for beta validation (ADR-0012)
+├── mock/             # Static HTML mocks for beta validation (ADR-0012)
+│   ├── public/        #   Main App (business management)
+│   ├── client-portal/ #   Client Portal (customer self-service)
+│   └── admin-panel/   #   Admin Panel (WeSell platform management)
 ├── mobile/
 │   ├── ios/          # SwiftUI, Clean Architecture
 │   └── android/      # Kotlin, Jetpack Compose
