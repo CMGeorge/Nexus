@@ -1,4 +1,8 @@
-FROM python:3.12-slim AS base
+# ── Build stage: uv + dependencies ──
+FROM ghcr.io/astral-sh/uv:latest AS uv
+
+# ── Runtime stage ──
+FROM python:3.12-slim AS runtime
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
@@ -6,12 +10,14 @@ ENV PYTHONPATH=/app
 
 WORKDIR /app
 
-RUN --mount=from=ghcr.io/astral-sh/uv,source=/uv,target=/usr/local/bin/uv \
-    uv python install 3.12
+# Copy uv binary from uv image
+COPY --from=uv /uv /usr/local/bin/uv
 
+# Install dependencies (cached layer)
 COPY pyproject.toml uv.lock ./
-RUN uv sync --frozen --no-dev
+RUN uv sync --frozen --no-dev --python-preference only-system
 
+# Copy application code
 COPY alembic.ini ./
 COPY alembic/ alembic/
 COPY app/ app/
