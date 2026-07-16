@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nexus.data"
+    namespace = "ro.wesell.nexus.data"
     compileSdk = 35
     defaultConfig { minSdk = 26 }
     compileOptions {

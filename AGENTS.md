@@ -2,6 +2,16 @@
 
 > Created by **WeSell.Solutions** — https://wesell.ro
 
+## Platform Structure (3 Parts)
+
+Nexus is a **business operations platform** with three distinct interfaces:
+
+| Part | Users | Purpose |
+|---|---|---|
+| **Main App** | Business owners, managers, employees | Day-to-day operations: appointments, tasks, team, chat, invoices |
+| **Client Portal** | End customers of the businesses | Self-service: book appointments, view invoices, chat, loyalty points |
+| **Admin Panel** | WeSell platform admins | Cross-tenant: dashboards, reports, company settings, logs |
+
 ## Architecture
 Monorepo for a multi-tenant SaaS platform (see ADR-0011).
 
@@ -198,6 +208,10 @@ docker compose up --build
     appointments/   # Scheduling domain
     jobs/           # Work order domain
     invoices/       # Billing domain (includes eFactura sub-module)
+    chat/           # Internal team chat + customer messaging
+    tasks/          # Internal task management
+    loyalty/        # Loyalty points + referral program
+    website/        # Website provisioning for clients
     users/          # User & role management
     notifications/  # Email/SMS/push domain
     files/          # File upload & storage domain

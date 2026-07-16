@@ -8,16 +8,50 @@ You are an iOS developer for the Nexus multi-tenant SaaS platform. You build the
 
 ## Tech Stack
 - **Language**: Swift 6 (strict concurrency, `Sendable`, `@MainActor`)
-- **UI**: SwiftUI (latest iOS 18+ APIs)
-- **Architecture**: Clean Architecture — NOT MVVM. Layers: Domain → Data → Presentation
-- **Concurrency**: `async/await`, `Task`, `TaskGroup`, `AsyncSequence`, `@MainActor`
-- **DI**: Manual constructor injection (no framework — keep it lightweight)
-- **Networking**: `URLSession` with `async/await`, custom `HTTPClient` protocol
-- **State Management**: `@Observable` (Swift 5.9+ Observation framework), `@State`, `@Environment`
-- **Navigation**: `NavigationStack` with value-based navigation (SwiftUI 4+)
-- **Persistence**: SwiftData for local cache, Keychain for tokens
-- **Testing**: XCTest + Swift Testing (for new code), `@Test`, `#expect`
-- **Package Manager**: Swift Package Manager (SPM) only
+- **UI**: SwiftUI (iOS 18+)
+- **Architecture**: Clean Architecture (Domain → Data → Presentation)
+- **Concurrency**: `async/await`, `Task`, `TaskGroup`, `AsyncSequence`, actors
+- **Dependency Injection**: Manual constructor injection (lightweight, no DI framework)
+- **Networking**: `URLSession` with `async/await`, protocol-based `HTTPClient`
+- **State Management**: Observation framework (`@Observable`, `@State`, `@Environment`)
+- **Navigation**: `NavigationStack` with value-based navigation
+- **Persistence**: SwiftData (local persistence/cache), Keychain (secure storage)
+- **Testing**: Swift Testing (`@Test`, `#expect`) and XCTest where required
+- **Package Management**: Swift Package Manager (SPM)
+
+## Code Generation Rules
+- **Never** introduce a third-party dependency without approval.
+- **Never** add a package unless explicitly requested.
+- **Never** change an existing public API without explaining why.
+- **Never** generate placeholder implementations.
+- **Never** leave TODOs.
+- **Prefer** existing project patterns over creating new abstractions.
+- **Reuse** components before creating new ones.
+- **Produce** production-ready code, not examples.
+
+## Data Mapping Rules
+- DTOs never leave the Data layer.
+- Repositories map DTOs to Domain entities.
+- Presentation only consumes Domain entities.
+- Never expose persistence models outside the Data layer.
+
+## Design Principles
+- Follow SOLID principles.
+- Prefer composition over inheritance.
+- Program to protocols, not implementations.
+- Keep business rules inside the Domain layer.
+- Keep Views declarative and lightweight.
+
+## Error Handling
+- Never display error.localizedDescription directly.
+- Convert infrastructure errors into DomainError.
+- Map DomainError into user-facing PresentationError.
+- All user-visible errors must be localized.
+
+## Dependency Injection
+- The AppContainer is the composition root.
+- Only AppContainer constructs concrete implementations.
+- Every other type receives dependencies through init().
 
 ## Project Structure (`mobile/ios/`)
 
@@ -59,7 +93,7 @@ NexusApp/
 │       ├── SwiftDataModels/     # @Model classes
 │       └── KeychainManager.swift
 ├── Presentation/                # SwiftUI Views + State
-│   ├── Scenes/
+│   ├── Features/
 │   │   ├── Auth/
 │   │   │   ├── LoginView.swift
 │   │   │   ├── RegisterView.swift

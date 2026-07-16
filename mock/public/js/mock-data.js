@@ -89,6 +89,48 @@ function getNextId(prefix) {
 function saveAppointments() { localStorage.setItem('nexus_appointments', JSON.stringify(APPOINTMENTS)); }
 function saveCustomers() { localStorage.setItem('nexus_customers', JSON.stringify(CUSTOMERS)); }
 function saveInvoices() { localStorage.setItem('nexus_invoices', JSON.stringify(INVOICES)); }
+function saveTasks() { localStorage.setItem('nexus_tasks', JSON.stringify(TASKS)); }
+function saveChatData() { localStorage.setItem('nexus_chatMessages', JSON.stringify(CHAT_MESSAGES)); localStorage.setItem('nexus_chatChannels', JSON.stringify(CHAT_CHANNELS)); }
+
+/* ── Tasks (internal) ── */
+let TASKS = [
+  { id:'tsk-1', title:'Verificare stoc piese', assignedTo:'Ion Vasilescu', priority:'high',    dueDate:'2026-07-17', status:'in-progress', createdBy:'Maria Ionescu' },
+  { id:'tsk-2', title:'Curatenie depozit',   assignedTo:'George Radu',   priority:'medium',  dueDate:'2026-07-20', status:'todo',        createdBy:'Maria Ionescu' },
+  { id:'tsk-3', title:'Actualizare preturi', assignedTo:'Maria Ionescu', priority:'low',     dueDate:'2026-07-25', status:'todo',        createdBy:'Andrei Popescu' },
+  { id:'tsk-4', title:'Scos gunoi reciclabil',assignedTo:'Alexandru Stoica',priority:'low',  dueDate:'2026-07-16', status:'done',        createdBy:'Maria Ionescu' },
+];
+
+/* ── Chat (internal team) ── */
+let activeChannel = 'ch-1';
+let CHAT_CHANNELS = [
+  { id:'ch-1', name:'Echipa',       lastMsg:'Am terminat interventia', time:'10:45' },
+  { id:'ch-2', name:'Urgente',      lastMsg:'Cine poate prelua?',      time:'09:30' },
+  { id:'ch-3', name:'Sediu Central',lastMsg:'Sedinta la 14:00',        time:'08:00' },
+];
+let CHAT_MESSAGES = [
+  { id:'msg-1', channelId:'ch-1', from:'Ion Vasilescu',   text:'Am terminat interventia',   time:'10:45' },
+  { id:'msg-2', channelId:'ch-1', from:'Maria Ionescu',   text:'Super, ai trimis factura?', time:'10:46' },
+  { id:'msg-3', channelId:'ch-1', from:'Ion Vasilescu',   text:'Da, am facut-o acum.',      time:'10:47' },
+  { id:'msg-4', channelId:'ch-2', from:'George Radu',     text:'Cine poate prelua o urgenta in Militari?', time:'09:30' },
+  { id:'msg-5', channelId:'ch-3', from:'Andrei Popescu',  text:'Sedinta la 14:00',          time:'08:00' },
+];
+
+(function loadPersisted() {
+  try {
+    const a = localStorage.getItem('nexus_appointments');
+    if (a) APPOINTMENTS = JSON.parse(a);
+    const c = localStorage.getItem('nexus_customers');
+    if (c) CUSTOMERS = JSON.parse(c);
+    const i = localStorage.getItem('nexus_invoices');
+    if (i) INVOICES = JSON.parse(i);
+    const t = localStorage.getItem('nexus_tasks');
+    if (t) TASKS = JSON.parse(t);
+    const cm = localStorage.getItem('nexus_chatMessages');
+    if (cm) CHAT_MESSAGES = JSON.parse(cm);
+    const cc = localStorage.getItem('nexus_chatChannels');
+    if (cc) CHAT_CHANNELS = JSON.parse(cc);
+  } catch(e) { /* ignore corrupt localStorage */ }
+})();
 
 function toast(msg, type) {
   const c = document.getElementById('toastContainer');

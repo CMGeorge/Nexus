@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nexus.presentation"
+    namespace = "ro.wesell.nexus.presentation"
     compileSdk = 35
     defaultConfig { minSdk = 26 }
     buildFeatures { compose = true }

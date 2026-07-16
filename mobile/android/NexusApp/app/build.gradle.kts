@@ -5,10 +5,10 @@ plugins {
 }
 
 android {
-    namespace = "com.nexus.app"
+    namespace = "ro.wesell.nexus.app"
     compileSdk = 35
     defaultConfig {
-        applicationId = "com.nexus.app"
+        applicationId = "ro.wesell.nexus"
         minSdk = 26
         targetSdk = 35
         versionCode = 1

@@ -11,13 +11,15 @@ function render(view) {
 /* ── Shell ── */
 function renderShell() {
   const nav = [
-    ['dashboard','📊','Dashboard'],
-    ['appointments','📅','Programari'],
-    ['jobs','🔧','Interventii'],
-    ['customers','👥','Clienti'],
-    ['invoices','📄','Facturi'],
+    ['dashboard','<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>','Dashboard'],
+    ['appointments','<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="12" cy="15" r="1"/><circle cx="16" cy="15" r="1"/><circle cx="8" cy="15" r="1"/></svg>','Programari'],
+    ['jobs','<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>','Interventii'],
+    ['customers','<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>','Clienti'],
+    ['invoices','<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>','Facturi'],
+    ['tasks','<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>','Taskuri'],
+    ['chat','<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>','Chat'],
   ];
-  const links = nav.map(([id,icon,label]) => `<li><a href="#${id}" class="${currentView===id?'active':''}" data-nav="${id}"><span class="icon">${icon}</span>${label}</a></li>`).join('');
+  const links = nav.map(([id,icon,label]) => `<li><a href="#${id}" class="${currentView===id?'active':''}" data-nav="${id}">${icon}${label}</a></li>`).join('');
   const branchOpts = currentBranch.isInstitution
     ? '<option value="'+currentBranch.id+'">'+currentBranch.name+' (Toate)</option>' +
       currentBranch.children.map(id => '<option value="'+id+'">'+BRANCHES[id].name+'</option>').join('')
@@ -25,7 +27,7 @@ function renderShell() {
   return `
     <div class="app-shell" id="appShell">
       <aside class="sidebar">
-        <div class="sidebar-logo">Nex<span>u</span>s</div>
+        <div class="sidebar-logo">Nex<em>u</em>s</div>
         <ul class="sidebar-nav">${links}</ul>
       </aside>
       <div class="main">
@@ -103,7 +105,9 @@ function renderContent(view) {
     case 'jobs': return renderJobs();
     case 'customers': return renderCustomers();
     case 'invoices': return renderInvoices();
-    default: return '<div class="empty-state"><div class="icon">🔍</div><p>Pagina nu a fost gasita</p></div>';
+    case 'tasks': return renderTasks();
+    case 'chat': return renderChat();
+    default: return '<div class="empty-state"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".4"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><p>Pagina nu a fost gasita</p></div>';
   }
 }
 
@@ -178,7 +182,7 @@ function renderAppointments() {
         ${['all','pending','confirmed','done'].map(s => `<span class="filter-badge ${statusFilter===s?'active':''}" onclick="statusFilter='${s}';document.getElementById('apptSearch').focus();refreshContent()">${s==='all'?'Toate':s}</span>`).join('')}
       </div>
     </div>
-    ${filteredBySearch.length === 0 ? '<div class="empty-state"><div class="icon">📅</div><p>Nicio programare gasita</p></div>' : renderTable(
+    ${filteredBySearch.length === 0 ? '<div class="empty-state"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".4"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><p>Nicio programare gasita</p></div>' : renderTable(
       ['Client','Serviciu','Data','Ora','Tehnician','Status','Pret',''],
       filteredBySearch.map(a => [`<strong onclick="showApptDetail('${a.id}')" style="cursor:pointer;color:var(--primary)">${a.customer}</strong>`, a.service, a.date, a.time, a.tech, statusBadge(a.status), a.price+' RON',
         `<button class="btn btn-sm btn-outline" onclick="showApptDetail('${a.id}')">👁</button>`])
@@ -324,16 +328,16 @@ function renderJobs() {
     return `
       <div class="page-header"><h2>Interventiile Mele</h2></div>
       <h3 style="margin-bottom:12px">Azi (${todayJobs.length})</h3>
-      ${todayJobs.length === 0 ? '<div class="empty-state"><div class="icon">✅</div><p>Nicio interventie azi. Relax! 🎉</p></div>' : ''}
+      ${todayJobs.length === 0 ? '<div class="empty-state"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".4"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><p>Nicio interventie azi</p></div>' : ''}
       ${todayJobs.map(j => jobCard(j)).join('')}
       ${upcoming.length > 0 ? `<h3 style="margin:20px 0 12px">Urmatoarele (${upcoming.length})</h3>` + upcoming.map(j => jobCard(j)).join('') : ''}
-      ${myJobs.length === 0 && todayJobs.length === 0 ? '<div class="empty-state"><div class="icon">🔧</div><p>Nu ai interventii asignate</p></div>' : ''}`;
+      ${myJobs.length === 0 && todayJobs.length === 0 ? '<div class="empty-state"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".4"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg><p>Nu ai interventii asignate</p></div>' : ''}`;
   }
 
   const pending = filtered.filter(a => a.status !== 'done');
   return `
     <div class="page-header"><h2>Toate Interventiile</h2><span style="color:var(--text-secondary)">${pending.length} active</span></div>
-    ${filtered.length === 0 ? '<div class="empty-state"><div class="icon">🔧</div><p>Nicio interventie in aceasta locatie</p></div>' : renderTable(
+    ${filtered.length === 0 ? '<div class="empty-state"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".4"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg><p>Nicio interventie in aceasta locatie</p></div>' : renderTable(
       ['Client','Serviciu','Data','Tehnician','Status','Pret','Actiuni'],
       filtered.map(j => [j.customer, j.service, j.date+' '+j.time, j.tech, statusBadge(j.status), j.price+' RON',
         j.status !== 'done' ? `<button class="btn btn-sm btn-primary" onclick="completeAppt('${j.id}')">✓ Finalizat</button>` : '—'])
@@ -352,7 +356,7 @@ function jobCard(j) {
     </div>
     <div style="margin-top:12px;display:flex;gap:8px">
       ${j.status === 'done'
-        ? `<span style="font-size:.8rem;color:var(--text-secondary)">✅ Finalizat</span>`
+        ? `<span style="font-size:.8rem;color:var(--color-success)">Finalizat</span>`
         : `<button class="btn btn-primary btn-sm" onclick="completeAppt('${j.id}')">✓ Finalizat</button>
            <button class="btn btn-outline btn-sm" onclick="addJobNote('${j.id}')">📝 Nota</button>`
       }
@@ -378,7 +382,7 @@ function renderCustomers() {
     <div class="search-bar">
       <input class="form-input" type="text" placeholder="Cauta dupa nume, telefon, email..." value="${searchQuery}" oninput="searchQuery=this.value;refreshContent()">
     </div>
-    ${filtered.length === 0 ? '<div class="empty-state"><div class="icon">👥</div><p>Niciun client gasit</p></div>' : renderTable(
+    ${filtered.length === 0 ? '<div class="empty-state"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".4"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg><p>Niciun client gasit</p></div>' : renderTable(
       ['Nume','Telefon','Email','Adresa','Interventii','Ultima',''],
       filtered.map(c => [`<strong onclick="showCustomerDetail('${c.id}')" style="cursor:pointer;color:var(--primary)">${c.name}</strong>`, c.phone, c.email, c.address, c.totalJobs, c.lastJob,
         `<button class="btn btn-sm btn-outline" onclick="showCustomerDetail('${c.id}')">👁</button>`])
@@ -471,7 +475,7 @@ function renderInvoices() {
         ${['all','paid','unpaid'].map(s => `<span class="filter-badge ${statusFilter===s?'active':''}" onclick="statusFilter='${s}';refreshContent()">${s==='all'?'Toate':s==='paid'?'Platite':'Neplatite'}</span>`).join('')}
       </div>
     </div>
-    ${filtered.length === 0 ? '<div class="empty-state"><div class="icon">📄</div><p>Nicio factura gasita</p></div>' : renderTable(
+    ${filtered.length === 0 ? '<div class="empty-state"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".4"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><p>Nicio factura gasita</p></div>' : renderTable(
       ['Numar','Client','Data emitere','Scadenta','Valoare','Status','eFactura',''],
       filtered.map(i => [i.number, `<strong onclick="showInvoiceDetail('${i.id}')" style="cursor:pointer;color:var(--primary)">${i.customer}</strong>`, i.date, i.dueDate, i.amount+' RON', statusBadge(i.status), eFacturaBadge(i.eFactura),
         `<div style="display:flex;gap:4px">
@@ -542,6 +546,126 @@ function generateBulkInvoices() {
 }
 
 /* ════════════════════════════════════════════
+   TASKS — Internal task management
+   ════════════════════════════════════════════ */
+function renderTasks() {
+  const filtered = filterData(TASKS);
+  const activeCount = TASKS.filter(t => t.status !== 'done').length;
+  return `
+    <div class="page-header"><h2>Taskuri interne</h2>
+      <button class="btn btn-primary btn-sm" onclick="openAddTaskModal()">+ Task nou</button>
+    </div>
+    <div class="search-bar">
+      <input class="form-input" type="text" placeholder="Cauta task..." value="${searchQuery}" oninput="searchQuery=this.value;refreshContent()">
+      <div class="badge-filters">
+        ${['all','todo','in-progress','done'].map(s => `<span class="filter-badge ${statusFilter===s?'active':''}" onclick="statusFilter='${s}';refreshContent()">${s==='all'?'Toate':s==='todo'?'De facut':s==='in-progress'?'In lucru':'Finalizate'}</span>`).join('')}
+        <span style="font-size:.8rem;color:var(--text-secondary)">${activeCount} active</span>
+      </div>
+    </div>
+    ${filtered.length === 0 ? '<div class="empty-state"><p>Niciun task gasit</p></div>' : renderTable(
+      ['Task','Catre','Prioritate','Status','Due'],
+      filtered.map(t => [
+        `<strong>${t.title}</strong>`,
+        t.assignedTo,
+        priorityBadge(t.priority),
+        statusBadge(t.status),
+        t.dueDate || '—'
+      ])
+    )}`;
+}
+
+function openAddTaskModal() {
+  openModal(`
+    <h3>Task nou</h3>
+    <div class="form-group"><label>Titlu</label><input class="form-input" id="mtitle" placeholder="Nume task"></div>
+    <div class="form-group"><label>Atribuit lui</label><select class="form-input" id="massigned"><option>${currentUser.name}</option>${TECHNICIANS.map(t=>'<option>'+t.name+'</option>').join('')}</select></div>
+    <div class="form-group"><label>Prioritate</label><select class="form-input" id="mpriority"><option>low</option><option>medium</option><option selected>high</option></select></div>
+    <div class="form-group"><label>Data limita</label><input type="date" class="form-input" id="mdue" value="${new Date(Date.now()+7*86400000).toISOString().slice(0,10)}"></div>
+    <div class="modal-actions">
+      <button class="btn btn-primary btn-sm" onclick="addTask()">Salveaza</button>
+      <button class="btn btn-outline btn-sm" onclick="closeModal()">Anuleaza</button>
+    </div>
+  `);
+}
+
+function addTask() {
+  TASKS.push({
+    id: 'tsk-'+Date.now(),
+    title: document.getElementById('mtitle').value || 'Task nou',
+    assignedTo: document.getElementById('massigned').value,
+    priority: document.getElementById('mpriority').value,
+    dueDate: document.getElementById('mdue').value,
+    status: 'todo',
+    createdBy: currentUser.name
+  });
+  saveTasks(); closeModal(); toast('Task creat!'); navigate('tasks');
+}
+
+/* ════════════════════════════════════════════
+   CHAT — Internal team + client messaging
+   ════════════════════════════════════════════ */
+function renderChat() {
+  return `
+    <div class="page-header"><h2>Chat</h2><span style="color:var(--text-secondary)">Mesaje interne</span></div>
+    <div class="chat-layout">
+      <div class="chat-sidebar">
+        <div style="padding:12px;border-bottom:1px solid var(--border)">
+          <input class="form-input" type="text" placeholder="Cauta conversatie..." style="width:100%">
+        </div>
+        <div class="chat-list">
+          ${CHAT_CHANNELS.map(c => `
+            <div class="chat-item ${c.id === activeChannel ? 'active' : ''}" onclick="activeChannel='${c.id}';refreshContent()">
+              <div class="chat-avatar">${c.name.charAt(0)}</div>
+              <div class="chat-info">
+                <span class="chat-name">${c.name}</span>
+                <span class="chat-preview">${c.lastMsg}</span>
+              </div>
+              <span class="chat-time">${c.time}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      <div class="chat-main">
+        <div class="chat-header">${CHAT_CHANNELS.find(c=>c.id===activeChannel)?.name || 'Selecteaza o conversatie'}</div>
+        <div class="chat-messages">
+          ${renderChatMessages()}
+        </div>
+        <div class="chat-input">
+          <input class="form-input" type="text" id="chatMsgInput" placeholder="Scrie un mesaj..." onkeypress="if(event.key==='Enter')sendChatMessage()">
+          <button class="btn btn-primary btn-sm" onclick="sendChatMessage()">Trimite</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderChatMessages() {
+  const msgs = CHAT_MESSAGES.filter(m => m.channelId === activeChannel);
+  if (msgs.length === 0) return '<div class="empty-state"><p>Niciun mesaj. Incepe o conversatie!</p></div>';
+  return msgs.map(m => `
+    <div class="chat-msg ${m.from === currentUser.name ? 'own' : ''}">
+      <div class="chat-msg-sender">${m.from}</div>
+      <div class="chat-msg-text">${m.text}</div>
+      <div class="chat-msg-time">${m.time}</div>
+    </div>
+  `).join('');
+}
+
+function sendChatMessage() {
+  const input = document.getElementById('chatMsgInput');
+  if (!input || !input.value.trim()) return;
+  CHAT_MESSAGES.push({
+    id: 'msg-'+Date.now(),
+    channelId: activeChannel,
+    from: currentUser.name,
+    text: input.value.trim(),
+    time: new Date().toLocaleTimeString('ro-RO', {hour:'2-digit',minute:'2-digit'})
+  });
+  const ch = CHAT_CHANNELS.find(c => c.id === activeChannel);
+  if (ch) { ch.lastMsg = input.value.trim(); ch.time = 'Acum'; }
+  saveChatData(); refreshContent();
+}
+
+/* ════════════════════════════════════════════
    MODALS
    ════════════════════════════════════════════ */
 function openModal(html) {
@@ -601,6 +725,12 @@ function statusBadge(status) {
 function eFacturaBadge(status) {
   const colors = { transmisa:'badge-confirmed', acceptata:'badge-done', descarcata:'badge-paid', neinviata:'badge-unpaid' };
   return `<span class="badge ${colors[status]||'badge-unpaid'}" style="font-size:.65rem">${status}</span>`;
+}
+
+function priorityBadge(priority) {
+  const colors = { high:'badge-unpaid', medium:'badge-pending', low:'badge-confirmed' };
+  const labels = { high:'Ridicata', medium:'Medie', low:'Scazuta' };
+  return `<span class="badge ${colors[priority]||'badge-pending'}">${labels[priority]||priority}</span>`;
 }
 
 function renderTable(headers, rows) {

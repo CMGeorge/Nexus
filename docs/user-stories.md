@@ -117,6 +117,48 @@ Organized by bounded context, prioritized by role.
 | SRCH-02 | As an admin, I want to generate reports (revenue by period, jobs by employee, customer activity) so that I can make business decisions | Admin | P2 |
 | SRCH-03 | As an employee, I want to filter any list by date range, status, and assigned user so that I can narrow down results | Employee | P1 |
 
+## 11. Tasks (Internal)
+
+| ID | Story | Role | Priority |
+|----|-------|------|----------|
+| TASK-01 | As a manager, I want to create tasks and assign them to employees so that I can delegate work | Manager | P1 |
+| TASK-02 | As an employee, I want to see my assigned tasks and their priority so that I know what to work on | Employee | P1 |
+| TASK-03 | As an employee, I want to mark tasks as in-progress or done so that my manager knows the status | Employee | P1 |
+| TASK-04 | As a manager, I want to see all tasks with status filters (todo, in-progress, done) so that I can track team progress | Manager | P1 |
+| TASK-05 | As a user, I want task due dates with overdue highlighting so that nothing gets missed | Any | P2 |
+
+## 12. Chat (Internal + Client)
+
+| ID | Story | Role | Priority |
+|----|-------|------|----------|
+| CHAT-01 | As an employee, I want to send direct messages to colleagues so that I can communicate without leaving the app | Employee | P1 |
+| CHAT-02 | As a manager, I want to create group channels (by branch, by team) so that teams have dedicated spaces | Manager | P1 |
+| CHAT-03 | As any user, I want to see real-time message delivery so that conversations flow naturally | Any | P1 |
+| CHAT-04 | As an employee, I want to chat with customers from within the main app so that I can answer questions quickly | Employee | P1 |
+| CHAT-05 | As a customer, I want to message the business about my upcoming appointment so that I can clarify details | Customer | P1 |
+| CHAT-06 | As a user, I want unread message badges so that I don't miss important messages | Any | P2 |
+| CHAT-07 | As an employee, I want to share images and files in chat so that I can send reference photos | Employee | P2 |
+
+## 13. Loyalty & Referral
+
+| ID | Story | Role | Priority |
+|----|-------|------|----------|
+| LOY-01 | As a customer, I want to earn points for each completed job so that I get rewarded for repeat business | Customer | P2 |
+| LOY-02 | As a customer, I want to redeem points for discounts on future services so that my loyalty has tangible value | Customer | P2 |
+| LOY-03 | As a customer, I want to receive a referral link to share with friends so that we both earn rewards | Customer | P2 |
+| LOY-04 | As a manager, I want to configure points per RON spent and conversion rates so that I control the loyalty program | Manager | P2 |
+| LOY-05 | As a business owner, I want to see loyalty program analytics (redemptions, top referrers) so that I measure ROI | Admin | P3 |
+
+## 14. Website Provisioning
+
+| ID | Story | Role | Priority |
+|----|-------|------|----------|
+| WEB-01 | As a business owner, I want to generate a simple booking page for my business so that customers can find me online | Admin | P2 |
+| WEB-02 | As a business owner, I want to customize my booking page with my logo, brand colors, and business info so that it looks professional | Admin | P2 |
+| WEB-03 | As a business owner, I want my booking page to show available services and time slots so that customers can self-book | Admin | P2 |
+| WEB-04 | As a customer, I want to visit a business's booking page and schedule an appointment without creating an account so that booking is frictionless | Customer | P2 |
+| WEB-05 | As a business owner, I want my booking page to have a custom subdomain (e.g., mybiz.nexus.ro) so that I can share a branded link | Admin | P3 |
+
 ---
 
 ## Summary
@@ -133,7 +175,11 @@ Organized by bounded context, prioritized by role.
 | Notifications | 4 | 0 | 1 | 3 |
 | Files | 5 | 2 | 1 | 2 |
 | Search & Reporting | 3 | 0 | 1 | 2 |
-| **Total** | **59** | **22** | **17** | **20** |
+| Tasks | 5 | 0 | 4 | 1 |
+| Chat | 7 | 0 | 5 | 2 |
+| Loyalty & Referral | 5 | 0 | 0 | 4 |
+| Website Provisioning | 5 | 0 | 0 | 4 |
+| **Total** | **86** | **22** | **27** | **33** |
 
 ### MVP Boundary (22 stories)
 The minimum viable product covers: registration/login, company creation, user invites with roles, customer CRUD, appointment scheduling with status tracking, job creation, invoice generation from jobs, and file uploads. A business can manage its full workflow with these 22 stories.

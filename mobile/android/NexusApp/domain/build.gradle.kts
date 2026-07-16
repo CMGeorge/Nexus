@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nexus.domain"
+    namespace = "ro.wesell.nexus.domain"
     compileSdk = 35
     defaultConfig { minSdk = 26 }
     compileOptions {
