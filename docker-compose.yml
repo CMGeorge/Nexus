@@ -94,6 +94,30 @@ services:
     networks:
       - nexus-net
 
+  # ── Mock Client Portal (ADR-0012) ────────────────────────────
+  client-portal:
+    build:
+      context: ./mock/client-portal
+      dockerfile: Dockerfile
+    container_name: nexus-client-portal
+    ports:
+      - "${PORT_CLIENT_PORTAL:-3702}:80"
+    restart: unless-stopped
+    networks:
+      - nexus-net
+
+  # ── Mock Admin Panel (ADR-0012) ──────────────────────────────
+  admin-panel:
+    build:
+      context: ./mock/admin-panel
+      dockerfile: Dockerfile
+    container_name: nexus-admin-panel
+    ports:
+      - "${PORT_ADMIN_PANEL:-3703}:80"
+    restart: unless-stopped
+    networks:
+      - nexus-net
+
 volumes:
   nexus_pgdata:
     driver: local

@@ -52,3 +52,17 @@ services:
       - "${PORT_MOCK:-3701}:80"
     volumes:
       - ./mock/public:/usr/share/nginx/html:delegated
+
+  # Mock Client Portal (customer self-service)
+  client-portal:
+    ports:
+      - "${PORT_CLIENT_PORTAL:-3702}:80"
+    volumes:
+      - ./mock/client-portal/public:/usr/share/nginx/html:delegated
+
+  # Mock Admin Panel (WeSell platform management)
+  admin-panel:
+    ports:
+      - "${PORT_ADMIN_PANEL:-3703}:80"
+    volumes:
+      - ./mock/admin-panel/public:/usr/share/nginx/html:delegated
