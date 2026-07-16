@@ -14,7 +14,7 @@ You are a code reviewer for the Nexus multi-tenant SaaS platform. Your job is to
 ## Review Checklist
 
 ### Architecture & DDD
-- [ ] Code is in the correct submodule (not at root level)
+- [ ] Code is in the correct component directory (backend/, mobile/, frontend/ — not root)
 - [ ] Domain module has proper structure: models, schemas, router, service, repository, deps
 - [ ] Business logic is in service layer, not in router
 

@@ -11,8 +11,14 @@ help: ## Show this help
 
 # ── Docker ──
 
-up: ## Start all services (base + dev overlay)
-	docker compose -f docker-compose.yml -f docker-compose.dev.yml --env-file .env up -d
+up: ## Start all services (base compose — infra + api)
+	docker compose --env-file .env up -d --build
+
+up-dev: ## Start with dev overlay (exposed ports, hot-reload, no frontend)
+	docker compose -f docker-compose.yml -f docker-compose.dev.yml --env-file .env up -d --build
+
+up-full: ## Start everything including frontend (requires frontend/ submodule)
+	docker compose -f docker-compose.yml -f docker-compose.dev.yml --profile full --env-file .env up -d --build
 
 up-build: ## Start all services with rebuild
 	docker compose -f docker-compose.yml -f docker-compose.dev.yml --env-file .env up -d --build
@@ -77,6 +83,10 @@ redis-shell: ## Open Redis CLI
 deploy-beta: ## Deploy to beta (rsync + pull + start)
 	rsync -avz --delete ./ $(or $(DEPLOY_USER_BETA),$$USER)@$(DEPLOY_HOST_BETA):$(DEPLOY_PATH_BETA) --exclude='backend/' --exclude='frontend/' --exclude='mobile/' --exclude='.git/'
 	ssh $(or $(DEPLOY_USER_BETA),$$USER)@$(DEPLOY_HOST_BETA) "cd $(DEPLOY_PATH_BETA) && docker compose --env-file .env pull && docker compose --env-file .env up -d"
+
+deploy-mock-beta: ## Deploy mock Admin Portal to beta (ADR-0012)
+	rsync -avz --delete ./mock/ $(or $(DEPLOY_USER_BETA),$$USER)@$(DEPLOY_HOST_BETA):$(DEPLOY_PATH_BETA)/mock/
+	ssh $(or $(DEPLOY_USER_BETA),$$USER)@$(DEPLOY_HOST_BETA) "cd $(DEPLOY_PATH_BETA) && docker compose -f docker-compose.yml -f docker-compose.dev.yml --env-file .env up -d --build mock"
 
 deploy-stage: ## Deploy to staging (rsync + pull + start)
 	rsync -avz --delete ./ $(or $(DEPLOY_USER_STAGE),$$USER)@$(DEPLOY_HOST_STAGE):$(DEPLOY_PATH_STAGE) --exclude='backend/' --exclude='frontend/' --exclude='mobile/' --exclude='.git/'

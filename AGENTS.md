@@ -1,20 +1,23 @@
 # Nexus - Agent Guidelines
 
-> Created by **WeSell.Solutions** — https://wesell.solutions
+> Created by **WeSell.Solutions** — https://wesell.ro
 
 ## Architecture
-Meta-repository for a multi-tenant SaaS platform. **Each component is a git submodule:**
+Monorepo for a multi-tenant SaaS platform (see ADR-0011).
 
 ```
-Nexus/                  # This repo — only docker-compose, CI, shared config
-  backend/              # Git submodule: FastAPI + PostgreSQL + Redis
-  frontend/             # Git submodule: Admin web UI (React/Vue)
-  mobile/               # Git submodule: iOS/Android app (Swift)
+Nexus/                  # Single repo — all components together
+  backend/              # FastAPI + PostgreSQL + Redis (DDD)
+  frontend/             # Admin web UI (React/Vue) — TBD
+  mock/                 # Static HTML mock for beta validation (ADR-0012)
+  mobile/               # iOS (SwiftUI) + Android (Kotlin)
+    ios/                #   iOS: Clean Architecture, Swift 6, async/await
+    android/            #   Android: Clean Architecture, Compose, Hilt
 ```
 
-- Never create application code at the root level. Always work inside the correct submodule.
 - Root-level changes are limited to: `docker-compose.yml`, `.github/workflows/`, `Makefile`, `.env.example`, shared tooling configs.
 - Multi-tenant: each company has isolated data. Tenant resolution via subdomain or header (`X-Tenant-ID`).
+- **Hierarchical tenants** (ADR-0010): Institutions can have multiple Branches. Institution users see all branches; branch users see only their branch. Uses `X-Tenant-ID` + optional `X-Branch-ID` header.
 - **Architecture pattern**: Domain-Driven Design (DDD) with bounded contexts, NOT Clean Architecture.
 - **Microservice-ready**: each bounded context can be extracted into an independent service with its own database (see ADR-0009).
 - **Design quality**: use `hallmark` skill (57 slop-test gates) for all UI work — prevents AI-generated-looking designs.
@@ -32,11 +35,16 @@ Nexus/                  # This repo — only docker-compose, CI, shared config
 
 Clean Architecture creates unnecessary indirection for a multi-domain SaaS. DDD's bounded contexts map directly to business capabilities and make tenant isolation explicit at the architecture level.
 
+> **Note on mobile apps**: iOS and Android use **Clean Architecture** (not DDD) because they are client-side apps — they don't own business logic, they consume the backend API. The backend's DDD bounded contexts map naturally to Clean Architecture domain layers in mobile.
+
 ## Tech Stack
 - **Backend**: Python 3.12+, FastAPI, SQLAlchemy 2.0 (async), Alembic, Pydantic v2
 - **Database**: PostgreSQL 16
 - **Cache/Queue**: Redis 7
 - **Auth**: JWT (local bcrypt), role-based: Admin, Manager, Employee, Customer
+- **eFactura**: Romanian national e-invoicing (CIUS-RO XML, ANAF SPV integration)
+- **iOS App**: Swift 6, SwiftUI, Clean Architecture, async/await, SPM, Swift Testing
+- **Android App**: Kotlin 2.x, Jetpack Compose, Clean Architecture, Coroutines/Flow, Hilt, Gradle KTS
 - **Testing**: Pytest + pytest-cov + httpx (async), coverage threshold 80%
 - **Linting**: ruff (`pyproject.toml` in backend), mypy strict mode
 - **Package manager**: uv (never pip/poetry)
@@ -94,6 +102,65 @@ API endpoints follow contract-first development:
 - Contracts are the source of truth for integration tests
 - The api-designer agent produces contracts; implementation follows the contract
 
+### Mock-First Validation (ADR-0012)
+Before building the real admin portal, we validate workflows with a static HTML mock:
+- **Deploy**: `make deploy-mock-beta` → live at beta:3678
+- **Test**: Share URL with business owners, watch them use it
+- **Iterate**: Edit `mock/public/`, redeploy, repeat
+- **Confirm**: Once workflows are validated, build the real app
+- **Throw away**: Mock is disposable — no shared code with the real app
+- Mock covers 3 personas: Business Owner (Admin), Manager, Technician
+
+### Documentation Standards (CRITICAL)
+Nexus is **polished, professional software**. Every piece of work must be crystal clear:
+
+- **Every idea → ADR**: Architecture decisions are documented with rationale, alternatives, and consequences
+- **Every API → Contract**: Endpoints are defined in `docs/contracts/{domain}.yaml` before a single line of code. Contracts include request/response examples, error codes, and auth requirements.
+- **Every domain → Domain Doc**: Each bounded context has a `docs/domains/{domain}.md` explaining its purpose, entities, relationships, and business rules.
+- **Every endpoint → Docstring**: Router functions have docstrings explaining what they do, what they return, and what errors they produce.
+- **Every schema → Field descriptions**: Pydantic models use `Field(description="...")` — never leave a field unexplained.
+- **Code is self-documenting**: Meaningful variable names, small functions, clear error messages. Comments explain WHY, not WHAT.
+- **Romanian market requirement**: All user-facing strings and documentation should be available in Romanian (ro-RO). Internal code/comments stay in English.
+
+### eFactura Romania Integration (MANDATORY)
+Nexus MUST integrate with **eFactura** (Romanian national e-invoicing system):
+
+- **What**: ANAF (Romanian tax authority) requires B2B invoices to be submitted via eFactura XML format (UBL 2.1 / CIUS-RO standard)
+- **When**: Mandatory for all B2B transactions in Romania since January 2024
+- **How**: Invoices generated in Nexus are automatically:
+  1. Created as standard invoice in the system
+  2. Converted to CIUS-RO XML format
+  3. Submitted to ANAF via eFactura API (SPV — Spațiul Privat Virtual)
+  4. Status tracked (submitted, accepted, rejected, downloaded by buyer)
+- **Architecture**: The `invoices/` bounded context has an `efactura/` sub-module handling XML generation and ANAF communication
+- **Integration points**:
+  - Invoice creation → auto-triggers eFactura submission
+  - Invoice status → synced with ANAF response
+  - Company settings → ANAF certificate upload (digital signing required)
+  - Dashboard → eFactura status overview (submitted today, pending, rejected)
+
+### Software Quality Standards
+Every line of code must reflect that Nexus is **production-grade, not a prototype**:
+
+| Standard | Rule |
+|---|---|
+| **Type safety** | mypy `strict` mode — no `Any` without justification |
+| **Test coverage** | ≥ 80% per domain, integration tests for all endpoints |
+| **Error handling** | Every endpoint returns proper RFC 7807 responses. No bare 500s. |
+| **Multi-tenant isolation** | Every query scoped by tenant. Zero cross-tenant data leaks. |
+| **API consistency** | Pagination, filtering, sorting identical across all list endpoints |
+| **Security** | OWASP Top-10 reviewed before merge. MFA for all roles. |
+| **Observability** | Prometheus metrics, structured logging, request IDs on every response |
+| **Design** | hallmark skill (57 gates) applied to all UI. No AI-slop looks. |
+| **Mobile quality** | iOS Human Interface Guidelines + Material Design 3. Native feel, not web-wrapper. |
+| **Accessibility** | WCAG AA for admin portal. VoiceOver/TalkBack for mobile apps. |
+- Mock covers 3 personas: Business Owner (Admin), Manager, Technician
+
+### AI Agent Tool Usage Rules
+- **NEVER write files via shell commands** — no `cat`, `echo`, `tee`, `python3 -c "...write..."`, heredocs (`<< 'EOF'`), or redirects (`>`) to create or modify files. Use VS Code editing tools only (`replace_string_in_file`, `multi_replace_string_in_file`).
+- **Terminal is for build/run/test only** — `uv sync`, `uv run pytest`, `docker compose up`, `make`, etc. Not for writing code.
+- **Reason**: Shell-written files are frequently corrupted by terminal output processing. VS Code editing tools write directly to disk and are reliable.
+
 ## Build and Test
 All commands run from the **backend submodule** directory:
 
@@ -126,7 +193,7 @@ docker compose up --build
     companies/      # Tenant/company domain
     appointments/   # Scheduling domain
     jobs/           # Work order domain
-    invoices/       # Billing domain
+    invoices/       # Billing domain (includes eFactura sub-module)
     users/          # User & role management
     notifications/  # Email/SMS/push domain
     files/          # File upload & storage domain

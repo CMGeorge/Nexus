@@ -2,7 +2,7 @@
 
 A production-ready multi-tenant SaaS platform for small businesses -- electricians, HVAC services, salons, restaurants -- to manage customers, appointments, teams, invoices, notifications, work history, and files. Built with AI-assisted software engineering at every layer.
 
-> **Created by [WeSell.Solutions](https://wesell.solutions)**
+> **Created by [WeSell.Solutions](https://wesell.ro)**
 
 ## Environments
 

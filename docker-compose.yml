@@ -38,6 +38,28 @@ services:
     networks:
       - nexus-net
 
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: nexus-api
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER:-nexus}:${POSTGRES_PASSWORD:-nexus_dev}@postgres:5432/${POSTGRES_DB:-nexus}
+      - REDIS_URL=redis://redis:6379/0
+      - ENVIRONMENT=development
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - nexus_uploads:/app/uploads
+    restart: unless-stopped
+    networks:
+      - nexus-net
+
   pgadmin:
     image: dpage/pgadmin4:latest
     container_name: nexus-pgadmin
@@ -64,6 +86,8 @@ volumes:
   nexus_pgdata:
     driver: local
   nexus_redisdata:
+    driver: local
+  nexus_uploads:
     driver: local
 
 networks:
