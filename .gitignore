@@ -32,10 +32,10 @@ htmlcov/
 .coverage
 .pytest_cache/
 
-# Submodules (tracked separately)
-/backend/
-/frontend/
-/mobile/
+# Submodules (tracked separately — uncomment when using git submodules)
+# /backend/
+# /frontend/
+# /mobile/
 
 # Node (frontend submodule)
 node_modules/
