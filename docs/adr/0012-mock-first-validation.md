@@ -39,7 +39,7 @@ mock/
 ```
 
 ### Validation Process
-1. Deploy to beta (192.168.1.31:3678)
+1. Deploy to beta (192.168.1.31:3701)
 2. Share URL with 2-3 business owners
 3. Watch them use it (screen share)
 4. Collect feedback, update mock (hours)

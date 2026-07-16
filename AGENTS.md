@@ -9,6 +9,7 @@ Monorepo for a multi-tenant SaaS platform (see ADR-0011).
 Nexus/                  # Single repo — all components together
   backend/              # FastAPI + PostgreSQL + Redis (DDD)
   frontend/             # Admin web UI (React/Vue) — TBD
+  desktop/              # Qt/QML desktop app (MVVM, C++17)
   mock/                 # Static HTML mock for beta validation (ADR-0012)
   mobile/               # iOS (SwiftUI) + Android (Kotlin)
     ios/                #   iOS: Clean Architecture, Swift 6, async/await
@@ -37,6 +38,8 @@ Clean Architecture creates unnecessary indirection for a multi-domain SaaS. DDD'
 
 > **Note on mobile apps**: iOS and Android use **Clean Architecture** (not DDD) because they are client-side apps — they don't own business logic, they consume the backend API. The backend's DDD bounded contexts map naturally to Clean Architecture domain layers in mobile.
 
+> **Note on desktop app**: The Qt/QML desktop app uses **MVVM** (Model-View-ViewModel) because Qt's `Q_PROPERTY` + signal/slot system is purpose-built for MVVM data binding. QML Views declaratively bind to C++ ViewModels, which call Repository classes that consume the REST API. No need for controllers — QML handles user input directly.
+
 ## Tech Stack
 - **Backend**: Python 3.12+, FastAPI, SQLAlchemy 2.0 (async), Alembic, Pydantic v2
 - **Database**: PostgreSQL 16
@@ -45,6 +48,7 @@ Clean Architecture creates unnecessary indirection for a multi-domain SaaS. DDD'
 - **eFactura**: Romanian national e-invoicing (CIUS-RO XML, ANAF SPV integration)
 - **iOS App**: Swift 6, SwiftUI, Clean Architecture, async/await, SPM, Swift Testing
 - **Android App**: Kotlin 2.x, Jetpack Compose, Clean Architecture, Coroutines/Flow, Hilt, Gradle KTS
+- **Desktop App**: Qt 6.11 LTS, QML, C++17, MVVM, CMake, Qt Network, SQLite (ADR-0013)
 - **Testing**: Pytest + pytest-cov + httpx (async), coverage threshold 80%
 - **Linting**: ruff (`pyproject.toml` in backend), mypy strict mode
 - **Package manager**: uv (never pip/poetry)
@@ -104,7 +108,7 @@ API endpoints follow contract-first development:
 
 ### Mock-First Validation (ADR-0012)
 Before building the real admin portal, we validate workflows with a static HTML mock:
-- **Deploy**: `make deploy-mock-beta` → live at beta:3678
+- **Deploy**: `make deploy-mock-beta` → live at beta:3701
 - **Test**: Share URL with business owners, watch them use it
 - **Iterate**: Edit `mock/public/`, redeploy, repeat
 - **Confirm**: Once workflows are validated, build the real app

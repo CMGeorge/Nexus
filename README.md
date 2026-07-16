@@ -11,6 +11,7 @@ All IPs, paths, ports, and credentials are defined in `.env` (never committed). 
 | Environment | Web App | API | Server | Path |
 |-------------|---------|-----|--------|------|
 | **Development** | localhost:${PORT_FRONTEND} | localhost:${PORT_API} | local | — |
+| **Mock (Beta Preview)** | mock-nexus.wesell.ro | — | ${DEPLOY_HOST_BETA} | ${DEPLOY_PATH_BETA} |
 | **Beta** | nexus-beta.wesell.ro | api-nexus-beta.wesell.ro | ${DEPLOY_HOST_BETA} | ${DEPLOY_PATH_BETA} |
 | **Staging** | nexus-stage.wesell.ro | api-nexus-stage.wesell.ro | ${DEPLOY_HOST_STAGE} | ${DEPLOY_PATH_STAGE} |
 | **Production** | nexus.wesell.ro | api-nexus.wesell.ro | ${DEPLOY_HOST_LIVE} | ${DEPLOY_PATH_LIVE} |
@@ -19,18 +20,22 @@ See `.env.example` for all 30+ configurable variables including ports, credentia
 
 ## Architecture
 
-Meta-repository with Git submodules -- each component is independently versioned:
+Monorepo (see ADR-0011):
 
 ```
 Nexus/
-├── backend/          # Git submodule: FastAPI + PostgreSQL + Redis
-├── frontend/         # Git submodule: Admin web UI (React/Vue)
-├── mobile/           # Git submodule: iOS/Android (Swift)
+├── backend/          # FastAPI + PostgreSQL + Redis (DDD)
+├── frontend/         # Admin web UI (React/Vue) — TBD
+├── desktop/          # Qt/QML desktop app (MVVM, C++17)
+├── mock/             # Static HTML mock for beta validation (ADR-0012)
+├── mobile/
+│   ├── ios/          # SwiftUI, Clean Architecture
+│   └── android/      # Kotlin, Jetpack Compose
 ├── docs/
 │   ├── adr/          # Architecture Decision Records
 │   └── contracts/    # OpenAPI API contracts
 ├── .github/
-│   ├── agents/       # Specialist AI agents (7 total)
+│   ├── agents/       # Specialist AI agents
 │   ├── skills/       # Backend + Docker skills
 │   ├── prompts/      # Task templates
 │   └── hooks/        # Pre-commit validation

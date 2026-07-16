@@ -48,16 +48,7 @@ services:
 
   # Mock Admin Portal (static HTML preview for beta validation — ADR-0012)
   mock:
-    build:
-      context: ./mock
-      dockerfile: Dockerfile
-    container_name: nexus-mock
     ports:
-      - "${PORT_MOCK:-3678}:80"
+      - "${PORT_MOCK:-3701}:80"
     volumes:
       - ./mock/public:/usr/share/nginx/html:delegated
-    restart: unless-stopped
-    networks:
-      - nexus-net
-    profiles:
-      - full
