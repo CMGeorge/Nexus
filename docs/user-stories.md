@@ -163,23 +163,23 @@ Organized by bounded context, prioritized by role.
 
 ## Summary
 
-| Domain | Stories | P0 (MVP) | P1 (v1.0) | P2 (v1.1) |
-|--------|---------|----------|-----------|-----------|
-| Auth & Security | 10 | 4 | 3 | 3 |
-| Companies | 5 | 2 | 1 | 2 |
-| Users & Roles | 5 | 2 | 2 | 1 |
-| Customers | 6 | 3 | 1 | 2 |
-| Appointments | 7 | 3 | 2 | 2 |
-| Jobs | 6 | 2 | 3 | 1 |
-| Invoices | 8 | 4 | 2 | 2 |
-| Notifications | 4 | 0 | 1 | 3 |
-| Files | 5 | 2 | 1 | 2 |
-| Search & Reporting | 3 | 0 | 1 | 2 |
-| Tasks | 5 | 0 | 4 | 1 |
-| Chat | 7 | 0 | 5 | 2 |
-| Loyalty & Referral | 5 | 0 | 0 | 4 |
-| Website Provisioning | 5 | 0 | 0 | 4 |
-| **Total** | **86** | **22** | **27** | **33** |
+| Domain | Stories | P0 (MVP) | P1 (v1.0) | P2 (v1.1) | P3 (future) |
+|--------|---------|----------|-----------|-----------|-------------|
+| Auth & Security | 10 | 4 | 3 | 3 | 0 |
+| Companies | 5 | 2 | 1 | 2 | 0 |
+| Users & Roles | 5 | 2 | 2 | 1 | 0 |
+| Customers | 6 | 3 | 1 | 2 | 0 |
+| Appointments | 7 | 3 | 2 | 2 | 0 |
+| Jobs | 6 | 2 | 3 | 1 | 0 |
+| Invoices | 8 | 4 | 2 | 2 | 0 |
+| Notifications | 4 | 0 | 1 | 3 | 0 |
+| Files | 5 | 2 | 1 | 2 | 0 |
+| Search & Reporting | 3 | 0 | 1 | 2 | 0 |
+| Tasks | 5 | 0 | 4 | 1 | 0 |
+| Chat | 7 | 0 | 5 | 2 | 0 |
+| Loyalty & Referral | 5 | 0 | 0 | 4 | 1 |
+| Website Provisioning | 5 | 0 | 0 | 4 | 1 |
+| **Total** | **86** | **22** | **27** | **33** | **2** |
 
 ### MVP Boundary (22 stories)
 The minimum viable product covers: registration/login, company creation, user invites with roles, customer CRUD, appointment scheduling with status tracking, job creation, invoice generation from jobs, and file uploads. A business can manage its full workflow with these 22 stories.
