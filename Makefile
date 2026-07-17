@@ -77,6 +77,23 @@ db-shell: ## Open PostgreSQL shell
 redis-shell: ## Open Redis CLI
 	docker compose exec redis redis-cli
 
+# ── CI / Pre-commit ──
+
+ci-local: ## Run GitHub Actions workflow locally (requires: brew install act)
+	./scripts/ci-local.sh
+
+ci-local-e2e: ## Run only the e2e workflow locally
+	./scripts/ci-local.sh -j e2e
+
+ci-local-list: ## List all CI workflows
+	./scripts/ci-local.sh --dry-run
+
+precommit-install: ## Install pre-commit hooks
+	brew install pre-commit && pre-commit install && pre-commit install --hook-type pre-push
+
+precommit-run: ## Run all pre-commit hooks manually
+	pre-commit run --all-files
+
 # ── Deploy ──
 # Uses DEPLOY_USER_* from .env; falls back to current user ($USER) if not set
 

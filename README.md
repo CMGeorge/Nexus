@@ -217,6 +217,14 @@ make check                  # ruff + mypy + pytest
 make test                   # Run tests with coverage
 make migrate                # Apply database migrations
 
+# Pre-commit hooks (run before every commit/push)
+make precommit-install      # Install hooks once
+make precommit-run          # Run all hooks manually
+
+# Local CI (simulate GitHub Actions locally)
+make ci-local               # Requires: brew install act
+make ci-local-e2e           # Run only e2e workflow
+
 # Docker
 make up-build               # Rebuild and start
 make logs                   # Tail all service logs

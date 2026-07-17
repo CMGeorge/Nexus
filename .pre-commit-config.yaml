@@ -1,0 +1,61 @@
+# Nexus SaaS — Pre-commit hooks
+# Ensures only tested, linted, type-checked code is committed.
+#
+# Install:  brew install pre-commit && pre-commit install
+# Run manually: pre-commit run --all-files
+
+repos:
+  # ── Backend: ruff lint + format ──
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.0
+    hooks:
+      - id: ruff
+        name: ruff (lint)
+        args: [--fix]
+        files: ^backend/
+      - id: ruff-format
+        name: ruff (format)
+        files: ^backend/
+
+  # ── Backend: mypy type check ──
+  - repo: local
+    hooks:
+      - id: mypy
+        name: mypy (type check)
+        entry: bash -c 'cd backend && uv run mypy .'
+        language: system
+        files: ^backend/.*\.py$
+        pass_filenames: false
+
+  # ── Backend: pytest (changed files only) ──
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest (unit tests)
+        entry: bash -c 'cd backend && uv run pytest tests/ -x --tb=short -q'
+        language: system
+        files: ^backend/.*\.py$
+        pass_filenames: false
+        stages: [pre-push]
+
+  # ── E2E: Playwright (pre-push only, slow) ──
+  - repo: local
+    hooks:
+      - id: playwright-e2e
+        name: playwright (e2e tests)
+        entry: bash -c 'cd tests/e2e && npx playwright test --project=main-app --project=client-portal --project=admin-panel'
+        language: system
+        files: ^(mock/|tests/e2e/).*
+        pass_filenames: false
+        stages: [pre-push]
+        require_serial: true
+
+  # ── General: trailing whitespace, merge conflicts ──
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: detect-private-key

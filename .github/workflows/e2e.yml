@@ -30,19 +30,27 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Start mock services
+        env:
+          PORT_MOCK: "3701"
+          PORT_CLIENT_PORTAL: "3702"
+          PORT_ADMIN_PANEL: "3703"
         run: |
           docker compose -f docker-compose.yml up -d --build mock client-portal admin-panel
-          # Wait for all 3 services to be healthy
+          # Wait for all 3 services to be healthy (max 30s each)
           for port in 3701 3702 3703; do
             echo "Waiting for port $port..."
             for i in $(seq 1 30); do
-              if curl -s -o /dev/null -w "%{http_code}" http://localhost:$port | grep -q 200; then
-                echo "Port $port is ready"
+              HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "http://localhost:$port" 2>/dev/null || echo "000")
+              if [ "$HTTP_CODE" = "200" ] || [ "$HTTP_CODE" = "304" ]; then
+                echo "Port $port is ready (HTTP $HTTP_CODE)"
                 break
               fi
+              echo "  Attempt $i: HTTP $HTTP_CODE, retrying..."
               sleep 1
             done
           done
+          # Show running containers for debugging
+          docker compose -f docker-compose.yml ps
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -61,6 +69,14 @@ jobs:
         run: cd tests/e2e && npx playwright test
         env:
           CI: true
+
+      - name: Docker logs (on failure)
+        if: failure()
+        run: |
+          echo "=== Docker containers ==="
+          docker compose -f docker-compose.yml ps
+          echo "=== Mock logs ==="
+          docker compose -f docker-compose.yml logs mock client-portal admin-panel --tail=50
 
       - name: Upload Playwright report
         if: always()
