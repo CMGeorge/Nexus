@@ -1,0 +1,100 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - text: Nex
+      - emphasis [ref=e6]: u
+      - text: s
+    - list [ref=e7]:
+      - listitem [ref=e8]:
+        - link "Dashboard" [ref=e9] [cursor=pointer]:
+          - /url: "#dashboard"
+      - listitem [ref=e15]:
+        - link "Programari" [ref=e16] [cursor=pointer]:
+          - /url: "#appointments"
+      - listitem [ref=e22]:
+        - link "Interventii" [ref=e23] [cursor=pointer]:
+          - /url: "#jobs"
+      - listitem [ref=e26]:
+        - link "Clienti" [ref=e27] [cursor=pointer]:
+          - /url: "#customers"
+      - listitem [ref=e33]:
+        - link "Facturi" [ref=e34] [cursor=pointer]:
+          - /url: "#invoices"
+  - generic [ref=e38]:
+    - banner [ref=e39]:
+      - generic [ref=e40]:
+        - combobox [ref=e41] [cursor=pointer]:
+          - option "Instalatii Bucuresti (Toate)" [selected]
+          - option "Sediu Central"
+          - option "Sector 3"
+        - generic [ref=e42]: Toate locatiile
+      - generic [ref=e43]:
+        - generic [ref=e44]: Admin
+        - generic [ref=e45] [cursor=pointer]:
+          - generic [ref=e46]: AP
+          - text: Andrei Popescu
+    - generic [ref=e47]:
+      - generic [ref=e48]:
+        - heading "Dashboard" [level=2] [ref=e49]
+        - generic [ref=e50]: joi, 16 iulie 2026
+      - generic [ref=e51]:
+        - generic [ref=e52]:
+          - generic [ref=e53]: Programari azi
+          - generic [ref=e54]: "3"
+          - generic [ref=e55]: "Valoare: 3450 RON"
+        - generic [ref=e56]:
+          - generic [ref=e57]: Venituri luna
+          - generic [ref=e58]: 3k RON
+          - generic [ref=e59]: +12% vs luna trecuta
+        - generic [ref=e60]:
+          - generic [ref=e61]: Facturi neincasate
+          - generic [ref=e62]: 7.0k RON
+          - generic [ref=e63]: 3 facturi
+        - generic [ref=e64]:
+          - generic [ref=e65]: Clienti activi
+          - generic [ref=e66]: "8"
+          - generic [ref=e67]: +1 luna aceasta
+      - generic [ref=e68]:
+        - generic [ref=e69]:
+          - generic [ref=e70]: eFactura — azi
+          - generic [ref=e71]: 2 transmise
+          - generic [ref=e72]: 2 neinviate
+        - generic [ref=e73]:
+          - generic [ref=e74]: Programari saptamana
+          - generic [ref=e75]: "10"
+          - generic [ref=e76]: 1 finalizate
+      - heading "Programari Azi" [level=3] [ref=e77]
+      - table [ref=e78]:
+        - rowgroup [ref=e79]:
+          - row [ref=e80]:
+            - columnheader "Client" [ref=e81]
+            - columnheader "Serviciu" [ref=e82]
+            - columnheader "Ora" [ref=e83]
+            - columnheader "Tehnician" [ref=e84]
+            - columnheader "Status" [ref=e85]
+            - columnheader "Pret" [ref=e86]
+        - rowgroup [ref=e87]:
+          - row [ref=e88]:
+            - cell [ref=e89]:
+              - strong [ref=e90] [cursor=pointer]: Alina Dumitrescu
+            - cell "Reparatie boiler" [ref=e91]
+            - cell "09:00" [ref=e92]
+            - cell "Ion Vasilescu" [ref=e93]
+            - cell "confirmed" [ref=e94]
+            - cell "450 RON" [ref=e96]
+          - row [ref=e97]:
+            - cell [ref=e98]:
+              - strong [ref=e99] [cursor=pointer]: Mihai Georgescu
+            - cell "Instalare aer conditionat" [ref=e100]
+            - cell "11:00" [ref=e101]
+            - cell "George Radu" [ref=e102]
+            - cell "confirmed" [ref=e103]
+            - cell "2800 RON" [ref=e105]
+          - row [ref=e106]:
+            - cell [ref=e107]:
+              - strong [ref=e108] [cursor=pointer]: Elena Stancu
+            - cell "Verificare instalatie sanitara" [ref=e109]
+            - cell "14:00" [ref=e110]
+            - cell "Ion Vasilescu" [ref=e111]
+            - cell "done" [ref=e112]
+            - cell "200 RON" [ref=e114]

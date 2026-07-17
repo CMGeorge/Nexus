@@ -11,6 +11,7 @@ from app.auth.router import router as auth_router
 from app.core.config import settings
 from app.core.database import check_database_health
 from app.core.middleware import RequestIDMiddleware, RequestTimingMiddleware
+from app.core.redis_client import check_redis_health, close_redis
 
 
 @asynccontextmanager
@@ -20,8 +21,12 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     db_healthy = await check_database_health()
     if not db_healthy:
         print("WARNING: Database is not reachable")
+    redis_healthy = await check_redis_health()
+    if not redis_healthy:
+        print("WARNING: Redis is not reachable — rate limiting and token blacklisting disabled")
     yield
     # Shutdown
+    await close_redis()
 
 
 app = FastAPI(

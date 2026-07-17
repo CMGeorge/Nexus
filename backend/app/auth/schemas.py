@@ -31,10 +31,17 @@ class RegisterRequest(BaseModel):
 
 
 class LoginRequest(BaseModel):
-    """Request body for login."""
+    """Request body for login.
+
+    If the user has MFA enabled, a valid TOTP code must be provided.
+    """
 
     email: EmailStr
     password: str
+    totp_code: str | None = Field(
+        None, min_length=6, max_length=6, pattern=r"^\d{6}$",
+        description="Required if MFA is enabled for this account",
+    )
 
 
 class RefreshRequest(BaseModel):

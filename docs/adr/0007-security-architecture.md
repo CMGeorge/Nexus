@@ -162,7 +162,21 @@ TTL: window_size * 2
 - Rate limit counters batched in Redis pipeline
 - MFA enrollment is one-time; remember-device reduces daily friction
 
-## Alternatives Considered
+## Validation Plan
+
+| Test | Expected Result |
+|------|----------------|
+| **Rate limiting** (31 requests in 60 seconds to auth endpoint from same IP) | 31st request returns **HTTP 429** with Retry-After header |
+| **SQL injection attempt** (`' OR '1'='1` in search parameter) | Query returns empty (parameterized); no data leaked; HTTP 200 with empty results |
+| **Expired JWT** (use token expired 1 minute ago) | Returns **HTTP 401** with RFC 7807 body; `"detail": "Token has expired"` |
+| **Tampered JWT** (modify payload without re-signing) | Returns **HTTP 401**; `"detail": "Invalid token signature"` |
+| **Cross-tenant access** (Tenant A token accessing Tenant B data) | Returns empty results or **HTTP 403**; zero data leaked |
+| **Missing tenant header** (request without X-Tenant-ID) | Returns **HTTP 400**; `"detail": "X-Tenant-ID header required"` |
+| **HTTP → HTTPS redirect** (request to http://api.nexus.ro) | Redirected to https://api.nexus.ro; HSTS header present |
+| **CORS** (cross-origin request from unauthorized domain) | Preflight rejected; CORS headers absent for disallowed origins |
+| **Password strength** (register with "password123") | Returns **HTTP 422**; `"detail": "Password must contain..."` |
+
+If any test fails, this ADR must be reconsidered.
 
 | Alternative | Rejected Because |
 |---|---|

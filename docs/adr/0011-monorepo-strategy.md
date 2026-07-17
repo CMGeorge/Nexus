@@ -104,7 +104,18 @@ If Nexus grows to the point where:
 - Each component keeps its own `CHANGELOG.md` for release notes
 - If a component grows enough to warrant independent releases, extract it via `git subtree split`
 
-## Alternatives Considered
+## Validation Plan
+
+| Test | Expected Result |
+|------|----------------|
+| **Single PR spans components** (change API schema + update mock + add test in one PR) | All changes in one commit; CI runs all relevant tests; no cross-repo coordination needed |
+| **Shared tooling** (update ruff config in root `pyproject.toml`) | All Python code (backend, scripts, tools) uses updated rules; no per-submodule config drift |
+| **CI pipeline** (push to `develop`) | One workflow tests backend (pytest), mock (Playwright), and infrastructure (docker compose up) in parallel |
+| **New component onboarding** (add `desktop/` to monorepo) | Desktop code lives in same repo; shares `.github/workflows/`, `AGENTS.md`, `.gitignore` patterns |
+| **Partial clone** (git clone --filter=blob:none on large repo) | Clone completes in **< 30 seconds**; only needed blobs fetched |
+| **Independent deploy** (deploy only `mock/` to beta) | `make deploy-mock-beta` works without touching backend or mobile code |
+
+If any test fails, this ADR must be reconsidered.
 
 | Alternative | Rejected Because |
 |---|---|

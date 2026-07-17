@@ -90,7 +90,18 @@ Nexus is designed with Domain-Driven Design (DDD) using bounded contexts. As the
 - More infrastructure complexity (service mesh, distributed tracing)
 - Phase 4 requires DevOps maturity
 
-## Alternatives Considered
+## Validation Plan
+
+| Test | Expected Result |
+|------|----------------|
+| **Extract a bounded context** (move `notifications/` to separate service with own DB) | Notifications service runs independently; continues consuming domain events; zero code changes in other contexts |
+| **Domain event delivery** (publish `AppointmentCreated` in `appointments/`) | Event arrives in `notifications/` service within **500 ms**; notification email sent |
+| **Modular monolith integrity** (start all bounded contexts in same FastAPI process) | All routers registered; no import conflicts; all endpoints respond correctly |
+| **Database per service** (give extracted `notifications/` service its own PostgreSQL) | Service operates with isolated schema; no foreign keys to other contexts' tables |
+| **Cross-context API call** (call `customers/` from `invoices/` via REST, not direct DB) | Invoice created with customer data fetched via API; no direct cross-context DB access |
+| **Phase migration** (monolith → separate schemas → separate DBs → separate services) | Each phase independently deployable; rollback possible at any point |
+
+If any test fails, this ADR must be reconsidered.
 | Alternative | Rejected Because |
 |-------------|-----------------|
 | Start as microservices | Premature — over-engineering for a new project. Modular monolith validates boundaries first. |

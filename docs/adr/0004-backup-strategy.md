@@ -144,7 +144,18 @@ Assumes 10 GB database growing to 50 GB over first year.
 - Monthly restore drill documented and scheduled as recurring Redmine task
 - Bandwidth test to offsite provider before relying on it for DR
 
-## Alternatives Considered
+## Validation Plan
+
+| Test | Expected Result |
+|------|----------------|
+| **Restore full backup** (pgBackRest restore latest) | Database restored and healthy; **recovery time < 15 min** |
+| **Point-in-time recovery** (restore to specific timestamp) | Database recovered to exact requested timestamp; data after that point is gone |
+| **Verify backup integrity** (`pgbackrest check` on latest backup) | All WAL segments present; no corruption detected; checksums pass |
+| **Offsite sync** (check Backblaze B2 bucket after nightly sync) | Latest backup files present in B2; **sync completed within 24h** of local backup |
+| **Restore from offsite** (pgBackRest restore from B2 repo) | Full recovery possible using only offsite backups; same RTO as local restore |
+| **WAL archiving** (check archive after 100 transactions) | All WAL segments archived within 60 seconds of generation |
+
+If any test fails, this ADR must be reconsidered.
 
 | Alternative | Rejected Because |
 |-------------|-----------------|

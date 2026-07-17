@@ -203,7 +203,20 @@ Electron has a larger developer pool, but Nexus is targeting field workers on va
 - Use Qt Creator IDE for rapid QML prototyping with live preview
 - Automate Qt SDK installation in CI/CD pipeline
 
-## Alternatives Considered
+## Validation Plan
+
+| Test | Expected Result |
+|------|----------------|
+| **Startup time** (cold launch on reference hardware: Intel i5, 8GB RAM, SSD) | **< 1 second** from click to interactive UI |
+| **Memory usage** (idle at dashboard, no jobs loaded) | **< 80 MB** RSS |
+| **Offline mode** (disable network, perform full CRUD on jobs) | Create, read, update, delete jobs work without internet; changes queued in SQLite outbox |
+| **Sync on reconnect** (restore network after offline changes) | Queued changes pushed to API; conflicts resolved (last-write-wins); UI updates automatically |
+| **Cross-platform build** (`cmake --build .` on Windows, macOS, Linux) | Same C++/QML codebase compiles without platform-specific `#ifdef` changes |
+| **QML binding** (change ViewModel property via C++) | QML UI reflects change within one frame (16ms); no manual `update()` calls |
+| **Login + JWT refresh** (authenticate, let token expire, trigger API call) | AuthInterceptor automatically refreshes token; API call succeeds without user intervention |
+| **Tenant isolation on desktop** (switch branch in UI) | X-Tenant-ID and X-Branch-ID headers update; subsequent API calls scoped to new branch |
+
+If any test fails, this ADR must be reconsidered.
 
 | Alternative | Rejected Because |
 |-------------|-----------------|

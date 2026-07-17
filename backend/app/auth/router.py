@@ -50,7 +50,11 @@ async def login(
 
     Returns access token (15 min) and refresh token (7 days).
     """
-    return await auth_service.login(email=data.email, password=data.password)
+    return await auth_service.login(
+        email=data.email,
+        password=data.password,
+        totp_code=data.totp_code,
+    )
 
 
 @router.post("/refresh", response_model=TokenResponse)

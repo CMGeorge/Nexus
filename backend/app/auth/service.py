@@ -32,6 +32,7 @@ from app.core.security import (
     verify_password,
     verify_totp,
 )
+from app.core.tenant import Tenant
 
 
 class AuthService:
@@ -72,8 +73,15 @@ class AuthService:
 
         # Create tenant (company)
         tenant_id = uuid.uuid4()
-        # In a full implementation this would create a Company record.
-        # For the auth scaffold we generate the tenant ID and embed it.
+        tenant = Tenant(
+            id=tenant_id,
+            name=tenant_name,
+            subdomain=None,  # Set later when tenant configures their domain
+            is_active=True,
+        )
+        self.session.add(tenant)
+
+        # Create user
 
         # Create user
         user = User(
@@ -91,8 +99,11 @@ class AuthService:
 
     # ── Login ──────────────────────────────────────────────────
 
-    async def login(self, email: str, password: str) -> TokenResponse:
-        """Authenticate user with email and password."""
+    async def login(self, email: str, password: str, totp_code: str | None = None) -> TokenResponse:
+        """Authenticate user with email and password.
+
+        If MFA is enabled, a valid TOTP code must be provided.
+        """
         user = await self.user_repo.get_by_email(email)
 
         if user is None or not verify_password(password, user.hashed_password):
@@ -106,6 +117,19 @@ class AuthService:
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail="Account is deactivated",
             )
+
+        # MFA enforcement
+        if user.mfa_enabled:
+            if totp_code is None:
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail="MFA is enabled for this account. Provide a valid TOTP code.",
+                )
+            if user.mfa_secret is None or not verify_totp(user.mfa_secret, totp_code):
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail="Invalid MFA code",
+                )
 
         return await self._issue_tokens(user)
 

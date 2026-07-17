@@ -48,6 +48,89 @@ You are an iOS developer for the Nexus multi-tenant SaaS platform. You build the
 - Map DomainError into user-facing PresentationError.
 - All user-visible errors must be localized.
 
+## Swift 6 Best Practices (MANDATORY)
+
+### `defer` — Critical Cleanup Blocks
+Use `defer` for any resource that MUST be released, regardless of how the scope exits:
+- **File I/O**: close file handles after read/write
+- **Database**: end transactions, close connections
+- **Network**: invalidate URLSession tasks, disconnect WebSocket
+- **Locks**: unlock `os_unfair_lock`, `NSLock`, actor-held state
+- **UI State**: dismiss loading spinners, re-enable buttons
+
+```swift
+func processFile(at url: URL) throws -> Data {
+    let handle = try FileHandle(forReadingFrom: url)
+    defer { try? handle.close() }  // Executes even if read throws
+    return try handle.readToEnd() ?? Data()
+}
+```
+
+### Exhaustive Pattern Matching
+Every `switch` on an enum MUST be exhaustive. Use `@unknown default` only for future-proofing Apple frameworks. For our own enums, list every case explicitly:
+- The compiler enforces exhaustiveness — no missing case bugs
+- Adding a new case forces all switch sites to be audited
+- No `default` case on domain enums (use explicit cases only)
+
+```swift
+// ✅ CORRECT — compiler catches missing cases
+switch result {
+case .success(let data):  handle(data)
+case .failure(let error): handle(error)
+case .loading:            showSpinner()
+}
+
+// ❌ WRONG — new cases silently fall through
+switch result {
+case .success(let data): handle(data)
+default: break
+}
+```
+
+### `@MainActor` — UI Thread Safety
+- **All** `ObservableObject` / `@Observable` classes that drive UI must be `@MainActor`
+- **All** published properties read by SwiftUI must be on MainActor
+- Use `nonisolated` for methods that don't touch UI state
+- Use `MainActor.run` or `Task { @MainActor in }` for one-off main thread dispatches
+
+```swift
+@MainActor
+@Observable
+final class DashboardViewModel {
+    var appointments: [Appointment] = []
+    var isLoading = false
+
+    nonisolated func formatDate(_ date: Date) -> String {
+        // Safe — no MainActor state accessed
+        date.formatted(.dateTime)
+    }
+}
+```
+
+### `@Observable` (Observation Framework)
+- Prefer `@Observable` over `@ObservableObject` (iOS 18+, modern, no `@Published`)
+- `@Observable` tracks property access at the call-site, not the object level
+- No need for `objectWillChange` or `@Published` wrappers
+
+### Actors for Data Safety
+- Use `actor` for mutable state shared across concurrent tasks
+- Auth token storage, cache managers, WebSocket state → actor
+- Actor methods are implicitly async (call with `await`)
+
+```swift
+actor TokenStore {
+    private var token: String?
+    func getToken() -> String? { token }
+    func setToken(_ t: String) { token = t }
+}
+```
+
+### `Sendable` Compliance
+- All types crossing actor/concurrency boundaries must be `Sendable`
+- Domain entities: `struct` (auto-Sendable if all properties are Sendable)
+- DTOs: mark as `Sendable` explicitly
+- Closures passed to Tasks: use `@Sendable`
+
 ## Dependency Injection
 - The AppContainer is the composition root.
 - Only AppContainer constructs concrete implementations.

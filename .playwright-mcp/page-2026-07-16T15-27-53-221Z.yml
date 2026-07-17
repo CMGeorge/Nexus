@@ -1,0 +1,101 @@
+- generic [ref=e1]:
+  - generic [ref=e60]:
+    - complementary [ref=e61]:
+      - generic [ref=e62]:
+        - heading "Instalatii Bucuresti" [level=2] [ref=e63]
+        - generic [ref=e64]: Portal Client · Elena Dumitrescu
+      - list [ref=e65]:
+        - listitem [ref=e66]:
+          - link "Dashboard" [ref=e67] [cursor=pointer]:
+            - /url: "#dashboard"
+        - listitem [ref=e73]:
+          - link "Programari" [ref=e74] [cursor=pointer]:
+            - /url: "#appointments"
+        - listitem [ref=e77]:
+          - link "Facturi" [ref=e78] [cursor=pointer]:
+            - /url: "#invoices"
+        - listitem [ref=e82]:
+          - link "Mesaje" [ref=e83] [cursor=pointer]:
+            - /url: "#chat"
+        - listitem [ref=e86]:
+          - link "Loialitate" [ref=e87] [cursor=pointer]:
+            - /url: "#loyalty"
+    - generic [ref=e90]:
+      - generic [ref=e91]:
+        - heading "Portal Client" [level=1] [ref=e92]
+        - generic [ref=e93]: Elena Dumitrescu
+      - generic [ref=e94]:
+        - generic [ref=e95]:
+          - heading "Programarile mele" [level=2] [ref=e96]
+          - button "+ Programare noua" [active] [ref=e97] [cursor=pointer]
+        - generic [ref=e98]: ToateViitoareTrecute
+        - table [ref=e100]:
+          - rowgroup [ref=e101]:
+            - row [ref=e102]:
+              - columnheader "Data" [ref=e103]
+              - columnheader "Ora" [ref=e104]
+              - columnheader "Serviciu" [ref=e105]
+              - columnheader "Tehnician" [ref=e106]
+              - columnheader "Status" [ref=e107]
+          - rowgroup [ref=e108]:
+            - row [ref=e109]:
+              - cell "2026-07-16" [ref=e110]
+              - cell "10:00" [ref=e111]
+              - cell "Verificare instalatie sanitara" [ref=e112]
+              - cell "Ion Vasilescu" [ref=e113]
+              - cell "confirmed" [ref=e114]
+            - row [ref=e116]:
+              - cell "2026-08-02" [ref=e117]
+              - cell "14:00" [ref=e118]
+              - cell "Revizie anuala centrala" [ref=e119]
+              - cell "Cristian Popa" [ref=e120]
+              - cell "pending" [ref=e121]
+            - row [ref=e123]:
+              - cell "2026-06-10" [ref=e124]
+              - cell "09:00" [ref=e125]
+              - cell "Desfundare teava bucatarie" [ref=e126]
+              - cell "Alexandru Stoica" [ref=e127]
+              - cell "done" [ref=e128]
+            - row [ref=e130]:
+              - cell "2026-05-20" [ref=e131]
+              - cell "11:00" [ref=e132]
+              - cell "Montaj cada dus" [ref=e133]
+              - cell "George Radu" [ref=e134]
+              - cell "done" [ref=e135]
+  - generic [ref=e138]:
+    - button "✕" [ref=e139] [cursor=pointer]
+    - heading "Programare noua" [level=3] [ref=e140]
+    - generic [ref=e141]:
+      - generic [ref=e142]: Serviciu
+      - combobox [ref=e143]:
+        - option "Reparatie boiler" [selected]
+        - option "Instalare aer conditionat"
+        - option "Verificare instalatie sanitara"
+        - option "Montaj centrala termica"
+        - option "Desfundare teava"
+        - option "Revizie anuala"
+        - option "Inlocuire calorifer"
+        - option "Montaj cada dus"
+        - option "Verificare instalatie electrica"
+    - generic [ref=e144]:
+      - generic [ref=e145]: Data
+      - textbox [ref=e146]: 2026-07-16
+    - generic [ref=e147]:
+      - generic [ref=e148]: Ora
+      - combobox [ref=e149]:
+        - option "08:00" [selected]
+        - option "09:00"
+        - option "10:00"
+        - option "11:00"
+        - option "12:00"
+        - option "13:00"
+        - option "14:00"
+        - option "15:00"
+        - option "16:00"
+        - option "17:00"
+    - generic [ref=e150]:
+      - generic [ref=e151]: Observatii
+      - textbox "Optional..." [ref=e152]
+    - generic [ref=e153]:
+      - button "Anuleaza" [ref=e154] [cursor=pointer]
+      - button "Confirma" [ref=e155] [cursor=pointer]

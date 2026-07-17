@@ -1,0 +1,49 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - heading "Instalatii Bucuresti" [level=2] [ref=e6]
+      - generic [ref=e7]: Portal Client · Elena Dumitrescu
+    - list [ref=e8]:
+      - listitem [ref=e9]:
+        - link "Dashboard" [ref=e10] [cursor=pointer]:
+          - /url: "#dashboard"
+      - listitem [ref=e16]:
+        - link "Programari" [ref=e17] [cursor=pointer]:
+          - /url: "#appointments"
+      - listitem [ref=e20]:
+        - link "Facturi" [ref=e21] [cursor=pointer]:
+          - /url: "#invoices"
+      - listitem [ref=e25]:
+        - link "Mesaje" [ref=e26] [cursor=pointer]:
+          - /url: "#chat"
+      - listitem [ref=e29]:
+        - link "Loialitate" [ref=e30] [cursor=pointer]:
+          - /url: "#loyalty"
+  - generic [ref=e33]:
+    - generic [ref=e34]:
+      - heading "Portal Client" [level=1] [ref=e35]
+      - generic [ref=e36]: Elena Dumitrescu
+    - generic [ref=e37]:
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - generic [ref=e40]: Urmatoarea programare
+          - generic [ref=e41]: 2026-07-16 10:00
+        - generic [ref=e42]:
+          - generic [ref=e43]: Facturi neplatite
+          - generic [ref=e44]: 200 RON
+        - generic [ref=e45]:
+          - generic [ref=e46]: Interventii efectuate
+          - generic [ref=e47]: "2"
+        - generic [ref=e48]:
+          - generic [ref=e49]: Puncte loialitate
+          - generic [ref=e50]: "340"
+      - generic [ref=e51]:
+        - heading "Urmatoarea programare" [level=3] [ref=e52]
+        - paragraph [ref=e53]:
+          - strong [ref=e54]: 2026-07-16
+          - text: la 10:00 — Verificare instalatie sanitara
+        - paragraph [ref=e55]: "Tehnician: Ion Vasilescu"
+      - generic [ref=e56]:
+        - heading "Interventii recente" [level=3] [ref=e57]
+        - paragraph [ref=e58]: 2026-06-10 — Desfundare teava bucatarie (Alexandru Stoica)
+        - paragraph [ref=e59]: 2026-05-20 — Montaj cada dus (George Radu)

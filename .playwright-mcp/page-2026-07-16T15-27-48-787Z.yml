@@ -1,0 +1,63 @@
+- generic [ref=e60]:
+  - complementary [ref=e61]:
+    - generic [ref=e62]:
+      - heading "Instalatii Bucuresti" [level=2] [ref=e63]
+      - generic [ref=e64]: Portal Client · Elena Dumitrescu
+    - list [ref=e65]:
+      - listitem [ref=e66]:
+        - link "Dashboard" [ref=e67] [cursor=pointer]:
+          - /url: "#dashboard"
+      - listitem [ref=e73]:
+        - link "Programari" [ref=e74] [cursor=pointer]:
+          - /url: "#appointments"
+      - listitem [ref=e77]:
+        - link "Facturi" [ref=e78] [cursor=pointer]:
+          - /url: "#invoices"
+      - listitem [ref=e82]:
+        - link "Mesaje" [ref=e83] [cursor=pointer]:
+          - /url: "#chat"
+      - listitem [ref=e86]:
+        - link "Loialitate" [ref=e87] [cursor=pointer]:
+          - /url: "#loyalty"
+  - generic [ref=e90]:
+    - generic [ref=e91]:
+      - heading "Portal Client" [level=1] [ref=e92]
+      - generic [ref=e93]: Elena Dumitrescu
+    - generic [ref=e94]:
+      - generic [ref=e95]:
+        - heading "Programarile mele" [level=2] [ref=e96]
+        - button "+ Programare noua" [ref=e97] [cursor=pointer]
+      - generic [ref=e98]: ToateViitoareTrecute
+      - table [ref=e100]:
+        - rowgroup [ref=e101]:
+          - row [ref=e102]:
+            - columnheader "Data" [ref=e103]
+            - columnheader "Ora" [ref=e104]
+            - columnheader "Serviciu" [ref=e105]
+            - columnheader "Tehnician" [ref=e106]
+            - columnheader "Status" [ref=e107]
+        - rowgroup [ref=e108]:
+          - row [ref=e109]:
+            - cell "2026-07-16" [ref=e110]
+            - cell "10:00" [ref=e111]
+            - cell "Verificare instalatie sanitara" [ref=e112]
+            - cell "Ion Vasilescu" [ref=e113]
+            - cell "confirmed" [ref=e114]
+          - row [ref=e116]:
+            - cell "2026-08-02" [ref=e117]
+            - cell "14:00" [ref=e118]
+            - cell "Revizie anuala centrala" [ref=e119]
+            - cell "Cristian Popa" [ref=e120]
+            - cell "pending" [ref=e121]
+          - row [ref=e123]:
+            - cell "2026-06-10" [ref=e124]
+            - cell "09:00" [ref=e125]
+            - cell "Desfundare teava bucatarie" [ref=e126]
+            - cell "Alexandru Stoica" [ref=e127]
+            - cell "done" [ref=e128]
+          - row [ref=e130]:
+            - cell "2026-05-20" [ref=e131]
+            - cell "11:00" [ref=e132]
+            - cell "Montaj cada dus" [ref=e133]
+            - cell "George Radu" [ref=e134]
+            - cell "done" [ref=e135]

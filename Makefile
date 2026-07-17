@@ -128,6 +128,34 @@ stop-live: ## Stop production containers
 
 # ── Data ──
 
+# ── E2E Tests (Playwright) ──
+test-e2e: ## Run Playwright end-to-end tests against mock services
+	@echo "Starting mock services..."
+	docker compose -f docker-compose.yml up -d --build mock client-portal admin-panel
+	@sleep 2
+	cd tests/e2e && npm ci --silent && npx playwright test
+
+test-e2e-main: ## Run only Main App e2e tests
+	cd tests/e2e && npx playwright test --project=main-app
+
+test-e2e-client: ## Run only Client Portal e2e tests
+	cd tests/e2e && npx playwright test --project=client-portal
+
+test-e2e-admin: ## Run only Admin Panel e2e tests
+	cd tests/e2e && npx playwright test --project=admin-panel
+
+test-e2e-headed: ## Run e2e tests in headed mode (see browser)
+	cd tests/e2e && npx playwright test --headed
+
+test-e2e-debug: ## Run e2e tests in debug mode (step-by-step)
+	cd tests/e2e && npx playwright test --debug
+
+test-e2e-report: ## Open Playwright HTML report
+	cd tests/e2e && npx playwright show-report
+
+test-e2e-install: ## Install Playwright browsers
+	cd tests/e2e && npm ci && npx playwright install --with-deps chromium
+
 backup-db: ## Backup PostgreSQL database locally
 	docker compose exec postgres pg_dump -U $(POSTGRES_USER) $(POSTGRES_DB) > backup_$$(date +%Y%m%d_%H%M%S).sql
 

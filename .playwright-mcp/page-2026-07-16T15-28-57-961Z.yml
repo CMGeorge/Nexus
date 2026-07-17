@@ -1,0 +1,67 @@
+- generic [ref=e235]:
+  - complementary [ref=e236]:
+    - generic [ref=e237]:
+      - heading "Nexus Admin" [level=2] [ref=e238]
+      - generic [ref=e239]: WeSell
+    - list [ref=e240]:
+      - listitem [ref=e241]:
+        - link "Dashboard" [ref=e242] [cursor=pointer]:
+          - /url: "#dashboard"
+      - listitem [ref=e248]:
+        - link "Companii" [ref=e249] [cursor=pointer]:
+          - /url: "#companies"
+      - listitem [ref=e253]:
+        - link "Audit" [ref=e254] [cursor=pointer]:
+          - /url: "#audit"
+      - listitem [ref=e258]:
+        - link "Setari" [ref=e259] [cursor=pointer]:
+          - /url: "#settings"
+    - generic [ref=e263]: Catalin Georgescu
+  - generic [ref=e264]:
+    - generic [ref=e265]:
+      - heading "Admin Panel" [level=1] [ref=e266]
+      - generic [ref=e267]: Catalin Georgescu · Platform Admin
+    - generic [ref=e268]:
+      - heading "Audit Logs" [level=2] [ref=e269]
+      - textbox "Cauta in log-uri..." [ref=e271]
+      - generic [ref=e272]:
+        - generic [ref=e273]:
+          - generic [ref=e274]: 10:45
+          - generic [ref=e275]: Andrei Popescu
+          - generic [ref=e276]: factura.creata
+          - generic [ref=e277]: Factura INV-2026-045 — 350 RON
+        - generic [ref=e278]:
+          - generic [ref=e279]: 10:30
+          - generic [ref=e280]: Maria Ionescu
+          - generic [ref=e281]: programare.confirmata
+          - generic [ref=e282]: "Programare #234 — Verificare AC"
+        - generic [ref=e283]:
+          - generic [ref=e284]: 10:15
+          - generic [ref=e285]: Ion Vasilescu
+          - generic [ref=e286]: interventie.finalizata
+          - generic [ref=e287]: "Interventie #112 — Desfundare teava"
+        - generic [ref=e288]:
+          - generic [ref=e289]: 09:50
+          - generic [ref=e290]: Admin
+          - generic [ref=e291]: companie.suspendata
+          - generic [ref=e292]: Suspendat pentru neplata — 45 zile
+        - generic [ref=e293]:
+          - generic [ref=e294]: 09:30
+          - generic [ref=e295]: Andrei Popescu
+          - generic [ref=e296]: client.adaugat
+          - generic [ref=e297]: "Client nou: Elena Dumitrescu"
+        - generic [ref=e298]:
+          - generic [ref=e299]: 09:00
+          - generic [ref=e300]: Sorin Munteanu
+          - generic [ref=e301]: cont.creat
+          - generic [ref=e302]: Inregistrare companie noua — plan Professional
+        - generic [ref=e303]:
+          - generic [ref=e304]: 08:45
+          - generic [ref=e305]: Maria Ionescu
+          - generic [ref=e306]: task.asignat
+          - generic [ref=e307]: Task "Verificare stoc" → Ion Vasilescu
+        - generic [ref=e308]:
+          - generic [ref=e309]: 08:30
+          - generic [ref=e310]: Admin
+          - generic [ref=e311]: rol.modificat
+          - generic [ref=e312]: User promovat la Manager

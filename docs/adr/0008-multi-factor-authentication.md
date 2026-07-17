@@ -210,7 +210,20 @@ CREATE INDEX idx_remembered_devices_user ON remembered_devices(user_id, tenant_i
 - In-app backup code re-download prompt at login if count ≤ 3
 - Clear UX guidance during enrollment: "Save these codes somewhere safe, like a password manager"
 
-## Alternatives Considered
+## Validation Plan
+
+| Test | Expected Result |
+|------|----------------|
+| **TOTP enrollment** (POST /auth/mfa/enroll) | QR code URI returned; scanning produces valid 6-digit code |
+| **Valid TOTP login** (provide correct TOTP after valid password) | JWT returned with `"mfa_verified": true` claim |
+| **Invalid TOTP** (provide wrong 6-digit code) | Returns **HTTP 401**; `"detail": "Invalid MFA code"`; no JWT issued |
+| **Backup code usage** (provide valid backup code instead of TOTP) | Login succeeds; that backup code marked as used; one fewer remaining |
+| **Backup code reuse** (use same backup code twice) | Second attempt returns **HTTP 401**; `"detail": "Backup code already used"` |
+| **Remember device** (login with `remember_device: true`) | Subsequent logins from same device (same fingerprint) skip TOTP for **30 days** |
+| **Email OTP fallback** (request email OTP when TOTP unavailable) | OTP delivered to registered email within **60 seconds**; valid for 5 minutes |
+| **Enforce MFA for tenant** (admin enables mandatory MFA for all users) | Non-MFA users redirected to enrollment on next login; cannot access app without enrolling |
+
+If any test fails, this ADR must be reconsidered.
 
 | Alternative | Rejected Because |
 |---|---|

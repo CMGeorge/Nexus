@@ -122,7 +122,18 @@ class Tenant(Base):
 - `get_accessible_tenant_ids()` dependency is cached per request (no N+1 lookups)
 - In the future, if deeper nesting is needed, the `IN (:ids)` pattern already supports it
 
-## Alternatives Considered
+## Validation Plan
+
+| Test | Expected Result |
+|------|----------------|
+| **Institution admin** (login as Instalatii Bucuresti admin, request appointments) | Sees all appointments from both branches (Sediu Central + Sector 3) |
+| **Branch user** (login as Sediu Central employee, request appointments) | Sees only Sediu Central appointments; branch-2 data invisible |
+| **Cross-branch isolation** (Branch-1 user sends `X-Branch-ID: branch-2`) | Request rejected with **HTTP 403**; `"detail": "Access denied to this branch"` |
+| **Missing X-Branch-ID** (branch user omits header) | Defaults to user's assigned branch; no institution-level data leaked |
+| **Hierarchical query** (`get_accessible_tenant_ids()` for institution user) | Returns `[inst-1, branch-1, branch-2]` — all accessible tenant IDs |
+| **New branch creation** (institution admin creates Branch-3) | `parent_id` set correctly; child branch inherits institution settings; appears in accessible scope immediately |
+
+If any test fails, this ADR must be reconsidered.
 
 | Alternative | Rejected Because |
 |---|---|

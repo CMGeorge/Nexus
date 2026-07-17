@@ -1,4 +1,10 @@
 # Nexus SaaS
+> **This structure was not built as a functional codebase, but as an ecosystem of architectural constraints and engineering directives designed for a swarm of LLM agents.**
+>
+> The ADRs define *the why* and *the how*, the API contracts define the *what*, while the agent skills and prompts dictate the *coding style*, architectural *constraints*, and engineering standards used to generate code automatically. >Every file under `.github/agents/` is an engineering prompt—an executable specification for a specialized AI agent.
+>
+> The goal is to demonstrate how a technical lead can design, orchestrate, and supervise AI agents to produce a stable, maintainable, full-stack application without personally writing every line of code.
+
 
 A production-ready multi-tenant SaaS platform for small businesses -- electricians, HVAC services, salons, restaurants -- to manage customers, appointments, teams, invoices, notifications, work history, and files. Built with AI-assisted software engineering at every layer.
 

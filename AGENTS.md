@@ -100,6 +100,7 @@ Significant architectural decisions are documented in `docs/adr/`:
 - Template: `docs/adr/template.md`
 - When to create: new domain boundaries, technology choices, API patterns, data modeling decisions
 - The architect agent produces ADRs; the orchestrator ensures they're committed
+- **Every ADR must include a Validation Plan**: specific, measurable tests that prove the decision was correct. If validation fails, the ADR is reconsidered.
 
 ### Task-Packets
 Features are decomposed into structured task-packets:
@@ -190,6 +191,14 @@ uv run pytest -v
 
 # Build and run with Docker
 docker compose up --build
+
+# Run Playwright end-to-end tests (requires Docker mock services)
+cd tests/e2e && npm install && npx playwright test
+
+# Run specific mock e2e tests
+cd tests/e2e && npx playwright test --project=main-app
+cd tests/e2e && npx playwright test --project=client-portal
+cd tests/e2e && npx playwright test --project=admin-panel
 ```
 
 ## Conventions

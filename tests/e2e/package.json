@@ -1,0 +1,19 @@
+{
+  "name": "nexus-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nexus SaaS — End-to-End tests with Playwright",
+  "scripts": {
+    "test": "playwright test",
+    "test:main": "playwright test specs/main-app.spec.ts",
+    "test:client": "playwright test specs/client-portal.spec.ts",
+    "test:admin": "playwright test specs/admin-panel.spec.ts",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "report": "playwright show-report",
+    "codegen": "playwright codegen"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0"
+  }
+}

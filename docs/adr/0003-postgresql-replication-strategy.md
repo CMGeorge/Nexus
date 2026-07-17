@@ -112,6 +112,20 @@ graph TB
 - Monthly failover drills (planned switchover via `patronictl switchover`)
 - PgBouncer `server_idle_timeout` tuned to prevent idle connections holding memory
 
+## Validation Plan
+
+| Test | Expected Result |
+|------|----------------|
+| **Simulate primary crash** (`docker stop` primary PostgreSQL container) | Patroni promotes standby; app reconnects via PgBouncer; **failover < 60 sec** |
+| **Disconnect synchronous standby** (isolate standby network) | Primary blocks commits (`synchronous_commit = remote_write`); no data accepted until standby returns or `synchronous_standby_names` is manually cleared |
+| **Restore from PITR** (pgBackRest restore to arbitrary timestamp) | Database recovered to exact requested timestamp; data written after that timestamp is gone; total recovery time **< 15 min** |
+| **Measure write latency overhead** (compare `synchronous_commit = off` vs `remote_write`) | Overhead **< 5 ms** for synchronous writes in same DC |
+| **etcd quorum loss** (kill 2 of 3 etcd nodes) | Patroni enters read-only mode; no split-brain; existing primary continues serving reads |
+| **Geo-replica lag** (measure `pg_stat_replication` on DC-2 standby under normal load) | Lag **< 2 seconds** under normal operations |
+| **Connection pool saturation** (simulate 500 concurrent connections through PgBouncer) | PgBouncer maintains connection limit; new connections queued, not rejected; no PostgreSQL connection exhaustion |
+
+If any test fails, this ADR must be reconsidered (status → Deprecated or Superseded by ADR that addresses the failure).
+
 ## Alternatives Considered
 
 | Alternative | Rejected Because |

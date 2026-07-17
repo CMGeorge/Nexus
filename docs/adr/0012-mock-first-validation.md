@@ -56,3 +56,16 @@ mock/
 - Zero backend rework if mock reveals wrong assumptions
 - Mock serves as living documentation for real implementation
 - Risk: mock may set unrealistic timeline expectations (mitigated by labeling as "Preview")
+
+## Validation Plan
+
+| Test | Expected Result |
+|------|----------------|
+| **Deploy mock to beta** (`make deploy-mock-beta`) | All 3 mock apps accessible at mock-nexus.wesell.ro, client-mock-nexus.wesell.ro, admin-mock-nexus.wesell.ro |
+| **Business owner workflow** (book appointment → assign technician → generate invoice → submit eFactura) | Complete flow works end-to-end in mock without errors; workflow validated by real business owner |
+| **Feedback iteration** (business owner requests change → update mock → redeploy) | Change deployed to beta within **hours, not weeks**; business owner confirms fix |
+| **Zero shared code** (compare mock/ with frontend/) | Mock shares no code with the real admin portal; mock is disposable by design |
+| **3 personas tested** (login as Admin, Manager, Technician) | Each persona sees correct views, data, and permissions in mock |
+| **Hallmark design** (audit mock against 57 Hallmark quality gates) | Mock passes Hallmark audit; no AI-generated design patterns detected |
+
+If any test fails, this ADR must be reconsidered.

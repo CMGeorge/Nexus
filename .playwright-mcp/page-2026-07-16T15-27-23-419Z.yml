@@ -1,0 +1,36 @@
+- generic [ref=e115]:
+  - complementary [ref=e116]:
+    - generic [ref=e117]:
+      - text: Nex
+      - emphasis [ref=e118]: u
+      - text: s
+    - list [ref=e119]:
+      - listitem [ref=e120]:
+        - link "Dashboard" [ref=e121] [cursor=pointer]:
+          - /url: "#dashboard"
+      - listitem [ref=e127]:
+        - link "Programari" [ref=e128] [cursor=pointer]:
+          - /url: "#appointments"
+      - listitem [ref=e134]:
+        - link "Interventii" [ref=e135] [cursor=pointer]:
+          - /url: "#jobs"
+      - listitem [ref=e138]:
+        - link "Clienti" [ref=e139] [cursor=pointer]:
+          - /url: "#customers"
+      - listitem [ref=e145]:
+        - link "Facturi" [ref=e146] [cursor=pointer]:
+          - /url: "#invoices"
+  - generic [ref=e150]:
+    - banner [ref=e151]:
+      - generic [ref=e152]:
+        - combobox [ref=e153] [cursor=pointer]:
+          - option "Instalatii Bucuresti (Toate)" [selected]
+          - option "Sediu Central"
+          - option "Sector 3"
+        - generic [ref=e154]: Toate locatiile
+      - generic [ref=e155]:
+        - generic [ref=e156]: Admin
+        - generic [ref=e157] [cursor=pointer]:
+          - generic [ref=e158]: AP
+          - text: Andrei Popescu
+    - paragraph [ref=e164]: Pagina nu a fost gasita

@@ -205,7 +205,18 @@ psql -c "SELECT pg_is_in_recovery();"  # should be false
 
 ---
 
-## Testing Schedule
+## Validation Plan
+
+| Test | Expected Result |
+|------|----------------|
+| **Scenario A — Single node failure** | Patroni promotes standby; app reconnects via PgBouncer; **failover < 30 sec**; no data loss |
+| **Scenario B — DC partial outage** | Standby promoted; Traefik redirects traffic; **total recovery < 5 min** |
+| **Scenario C — Full DC loss** | Geo-replica promoted; DNS cutover executed; **total recovery < 15 min**; data loss limited to async replication lag (< 2s) |
+| **Scenario D — Data corruption** | pgBackRest PITR restore to point before corruption; **recovery < 15 min**; corrupted data gone, legitimate data intact |
+| **Runbook execution** (operator follows runbook without prior rehearsal) | All 4 scenarios completed successfully by a single engineer following only the runbook |
+| **Monitoring alert** (trigger each scenario in staging) | Prometheus alerts fire within 30 seconds; Grafana dashboard shows degraded status |
+
+If any test fails, this ADR must be reconsidered.
 
 | Test | Frequency | Owner |
 |------|----------|-------|

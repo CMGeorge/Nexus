@@ -138,7 +138,18 @@ The backend's files service resolves the tenant UUID from `Depends(get_current_t
 - Monthly restore test: verify DC-2 can serve files independently
 - Traefik routes file traffic to MinIO via path-based routing or dedicated subdomain (`files.nexus.app`)
 
-## Alternatives Considered
+## Validation Plan
+
+| Test | Expected Result |
+|------|----------------|
+| **Simulate 2 disk failures** (kill 2 of 4 MinIO nodes) | EC 4:2 erasure coding tolerates loss; all files readable; no data corruption |
+| **Cross-DC replication** (upload file to DC-1, check DC-2 bucket) | File appears in DC-2 bucket within **30 seconds** |
+| **S3 API compatibility** (`aws s3 ls --endpoint-url http://minio:9000`) | Standard S3 commands work against MinIO; listing, upload, download, delete |
+| **Bucket policy enforcement** (attempt cross-tenant access) | Tenant A cannot read Tenant B's bucket objects |
+| **Storage recovery after full DC-1 loss** (restore from DC-2 replicas) | All files available from DC-2; bucket replication lag **< 1 minute** |
+| **Upload throughput** (100 concurrent 5MB uploads) | Throughput > 100 MB/s on local network; no upload failures |
+
+If any test fails, this ADR must be reconsidered.
 
 | Alternative | Rejected Because |
 |-------------|-----------------|
