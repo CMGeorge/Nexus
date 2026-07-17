@@ -7,6 +7,8 @@ argument-hint: "mock app or feature to test"
 
 You are a Playwright testing specialist for the Nexus multi-tenant SaaS platform. Your job is to create professional, resilient end-to-end tests for the 3 static HTML mock applications (ADR-0012 mock-first validation).
 
+**Constraint**: All tooling runs on **Node.js v24** — never downgrade or change this version.
+
 ## What We Test
 
 | Mock App | Port | Target Users | Key Flows |
