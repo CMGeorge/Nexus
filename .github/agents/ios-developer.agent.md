@@ -219,13 +219,96 @@ NexusApp/
 ```
 
 ## Constraints
-- DO NOT create Massive Views — every View gets a dedicated ViewModel
-- DO NOT import frameworks into Domain layer — it must be pure Swift
-- DO NOT use Combine — use `async/await` and `@Observable` exclusively
-- ALWAYS use constructor injection for dependencies (protocol-based)
-- ALWAYS annotate UI-thread work with `@MainActor`
-- NEVER force-unwrap optionals — use `guard let` or optional binding
-- ALWAYS handle loading, error, and empty states in every View
+
+### Struct vs Class
+- **Prefer `struct` over `class`** — value semantics are safer and more predictable in Swift.
+- Use `class` only when identity, inheritance, or shared mutable state is required.
+- Classes must be `final` unless subclassing is explicitly required and justified.
+
+### Single Responsibility
+- Types should have **one clear responsibility**.
+- Avoid ViewModels that perform networking, persistence, caching, AND formatting.
+- A ViewModel that calls an API, writes to SwiftData, formats dates, and manages navigation state is too large — split it.
+
+### SwiftUI Views Are Declarative
+- Views should NOT:
+  - Perform networking
+  - Access persistence (Core Data, SwiftData, UserDefaults)
+  - Contain business rules or validation logic
+- Move business logic to ViewModels or domain services.
+- Views bind to state — they do not own it.
+
+### Dependency Injection
+- The **AppContainer is the only composition root**.
+- Do not instantiate concrete services outside AppContainer.
+- No service locators, singletons, or static factories.
+
+### Async/Await
+- **Prefer `async/await`** — do not introduce new completion-handler APIs.
+- All async work must respect cancellation:
+  - Use `try Task.checkCancellation()` before expensive operations.
+  - Use `guard !Task.isCancelled else { return }` for cooperative cancellation.
+- **Avoid `Task.detached`** — prefer structured concurrency (`async let`, `TaskGroup`).
+- Prefer `async let` or `TaskGroup` over manually creating multiple Tasks.
+
+### Error Handling
+- **Don't ignore errors** — avoid `try?`. Use it only when failure is intentionally silent.
+- Use **typed domain errors** (enums conforming to `Error` or `LocalizedError`).
+- Do not throw `NSError` unless interoperating with Objective-C.
+- Never display `error.localizedDescription` directly.
+- Convert infrastructure errors into `DomainError`.
+- Map `DomainError` into user-facing `PresentationError`.
+- All user-visible errors must be localized.
+
+### Memory Management
+- **Do not use `[weak self]` by default** — capture weakly only to avoid actual retain cycles.
+- Prefer structured concurrency over manual weak-strong dances.
+
+### Protocols
+- **Depend on protocols**, not concrete types.
+- Construct concrete implementations only in AppContainer.
+- Protocols define **capabilities** — prefer multiple focused protocols over one large protocol.
+- Follow the **Interface Segregation Principle**: small, focused protocols are better.
+
+### Naming & API Design
+- Follow [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/).
+- Names should read naturally at the call site: `user.fetchAvatar()` not `fetchUserAvatar(user)`.
+
+### Identifiers
+- **Avoid using array indices as identifiers** — use stable IDs (`UUID`, `Hashable` conformance).
+
+### Property Wrappers
+- Choose the appropriate wrapper deliberately:
+  - `@State` — local view state
+  - `@Binding` — passed-down writable state
+  - `@Environment` — read-only from environment
+  - `@EnvironmentObject` — only when appropriate (prefer `@Environment`)
+  - `@Observable` — for observable state (modern SwiftUI, iOS 18+)
+- Prefer `@Observable` over `@ObservableObject` (no `@Published` needed).
+
+### SwiftUI View Patterns
+- **Avoid side effects inside `body`** — use `.task`, `.onAppear`, `.onDisappear` for effects.
+- Prefer `LazyVStack` / `LazyHStack` for large collections to avoid eager loading.
+- **Never create `DateFormatter` inside `body`** or computed properties executed frequently — reuse instances.
+- Avoid blocking image decoding on the `MainActor` — use `.task` to decode off the main thread.
+
+### Testability
+- Business logic should be **testable without SwiftUI**.
+- Inject dependencies through initializers (constructor injection).
+- All ViewModel states (idle, loading, success, error) must be testable.
+
+### Concurrency
+- **Treat concurrency warnings as build errors** — types crossing actor boundaries must conform to `Sendable`.
+- All `@Observable` / `@ObservableObject` classes driving UI must be `@MainActor`.
+
+### Interoperability
+- **Avoid `NSObject` inheritance** unless required by Apple frameworks or Objective-C interop.
+- Keep Domain layer pure Swift — no Foundation imports beyond essentials.
+
+### Legacy
+- **DO NOT use Combine** — use `async/await` and `@Observable` exclusively.
+- **NEVER force-unwrap optionals** — use `guard let` or optional binding.
+- **ALWAYS handle loading, error, and empty states** in every View.
 
 ## Clean Architecture Rules
 
