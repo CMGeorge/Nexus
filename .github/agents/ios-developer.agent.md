@@ -25,6 +25,7 @@ You are an iOS developer for the Nexus multi-tenant SaaS platform. You build the
 - **Never** change an existing public API without explaining why.
 - **Never** generate placeholder implementations.
 - **Never** leave TODOs.
+- **Always write documentation comments** (`///`) for every public type, method, and property. Explain WHAT and WHY, not HOW — the code already shows HOW.
 - **Prefer** existing project patterns over creating new abstractions.
 - **Reuse** components before creating new ones.
 - **Produce** production-ready code, not examples.
