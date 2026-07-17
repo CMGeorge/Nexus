@@ -1,0 +1,262 @@
+openapi: "3.0.3"
+info:
+  title: Nexus Jobs API
+  version: "1.0.0"
+  description: |
+    Jobs / work orders domain. CRUD + cancel endpoint.
+
+    **Statuses**: pending, in_progress, completed, invoiced, cancelled.
+    **Multi-tenant**: All queries scoped to tenant.
+    **Pagination**: Cursor-based.
+
+servers:
+  - url: http://localhost:8000/api/v1/jobs
+    description: Local development
+
+paths:
+
+  /:
+    post:
+      summary: Create a job
+      operationId: createJob
+      tags: [Jobs]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JobCreate"
+      responses:
+        "201":
+          description: Job created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobResponse"
+
+    get:
+      summary: List jobs (cursor-based)
+      operationId: listJobs
+      tags: [Jobs]
+      parameters:
+        - name: cursor
+          in: query
+          schema: { type: string }
+        - name: limit
+          in: query
+          schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [pending, in_progress, completed, invoiced, cancelled]
+        - name: customer_id
+          in: query
+          schema: { type: string, format: uuid }
+        - name: assigned_to
+          in: query
+          schema: { type: string, format: uuid }
+      responses:
+        "200":
+          description: Paginated list.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobListResponse"
+
+  /{job_id}:
+    get:
+      summary: Get a job by ID
+      operationId: getJob
+      tags: [Jobs]
+      parameters:
+        - $ref: "#/components/parameters/JobId"
+      responses:
+        "200":
+          description: Job details.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobResponse"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+    patch:
+      summary: Update a job (partial)
+      operationId: updateJob
+      tags: [Jobs]
+      parameters:
+        - $ref: "#/components/parameters/JobId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JobUpdate"
+      responses:
+        "200":
+          description: Updated.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JobResponse"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+    delete:
+      summary: Cancel a job
+      operationId: cancelJob
+      tags: [Jobs]
+      parameters:
+        - $ref: "#/components/parameters/JobId"
+      responses:
+        "200":
+          description: Job cancelled (status set to cancelled).
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MessageResponse"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+components:
+  parameters:
+    JobId:
+      name: job_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+
+  schemas:
+
+    JobCreate:
+      type: object
+      required: [customer_id, title]
+      properties:
+        customer_id:
+          type: string
+          format: uuid
+        appointment_id:
+          type: string
+          format: uuid
+          nullable: true
+          description: Optional source appointment
+        assigned_to:
+          type: string
+          format: uuid
+          nullable: true
+        title:
+          type: string
+          minLength: 1
+          maxLength: 255
+        description:
+          type: string
+          nullable: true
+        estimated_hours:
+          type: number
+          minimum: 0
+          nullable: true
+        notes:
+          type: string
+          nullable: true
+
+    JobUpdate:
+      type: object
+      properties:
+        title:           { type: string, minLength: 1, maxLength: 255, nullable: true }
+        description:     { type: string, nullable: true }
+        assigned_to:     { type: string, format: uuid, nullable: true }
+        status:
+          type: string
+          enum: [pending, in_progress, completed, invoiced, cancelled]
+          nullable: true
+        estimated_hours: { type: number, minimum: 0, nullable: true }
+        actual_hours:    { type: number, minimum: 0, nullable: true }
+        parts_cost:      { type: number, minimum: 0, nullable: true }
+        labor_cost:      { type: number, minimum: 0, nullable: true }
+        notes:           { type: string, nullable: true }
+
+    JobResponse:
+      type: object
+      properties:
+        id:              { type: string, format: uuid }
+        tenant_id:       { type: string, format: uuid }
+        customer_id:     { type: string, format: uuid }
+        appointment_id:  { type: string, format: uuid, nullable: true }
+        assigned_to:     { type: string, format: uuid, nullable: true }
+        title:           { type: string }
+        description:     { type: string, nullable: true }
+        status:          { type: string }
+        estimated_hours: { type: number, nullable: true }
+        actual_hours:    { type: number, nullable: true }
+        parts_cost:      { type: number, nullable: true }
+        labor_cost:      { type: number, nullable: true }
+        notes:           { type: string, nullable: true }
+        is_active:       { type: boolean }
+        completed_at:    { type: string, format: date-time, nullable: true }
+        created_at:      { type: string, format: date-time }
+        updated_at:      { type: string, format: date-time }
+
+    JobSummary:
+      type: object
+      properties:
+        id:          { type: string, format: uuid }
+        customer_id: { type: string, format: uuid }
+        assigned_to: { type: string, format: uuid, nullable: true }
+        title:       { type: string }
+        status:      { type: string }
+        created_at:  { type: string, format: date-time }
+
+    JobListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/JobSummary"
+        cursor:
+          $ref: "#/components/schemas/CursorMeta"
+
+    CursorMeta:
+      type: object
+      properties:
+        next:     { type: string, nullable: true }
+        has_more: { type: boolean }
+
+    MessageResponse:
+      type: object
+      properties:
+        message: { type: string }
+
+    APIError:
+      type: object
+      properties:
+        type:   { type: string }
+        title:  { type: string }
+        detail: { type: string }
+        status: { type: integer }
+
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/APIError"
+    Unauthorized:
+      description: Missing or invalid authentication
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/APIError"
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - BearerAuth: []
