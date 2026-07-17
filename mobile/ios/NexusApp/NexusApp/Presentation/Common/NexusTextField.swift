@@ -29,13 +29,16 @@ struct NexusTextField: View {
             )
             .onSubmit { onSubmit?() }
 
-            if let error = errorMessage {
-                Text(error)
-                    .font(.caption)
-                    .foregroundStyle(.red)
-                    .padding(.leading, 4)
-                    .transition(.opacity.combined(with: .move(edge: .top)))
-            }
+            // Reserve space for error text — prevents layout shifts that
+            // trigger keyboard constraint recalculations (SecureField's
+            // _UIRemoteKeyboardPlaceholderView conflict is harmless but
+            // noisy when fired repeatedly).
+            Text(errorMessage ?? " ")
+                .font(.caption)
+                .foregroundStyle(.red)
+                .padding(.leading, 4)
+                .frame(minHeight: 16)
+                .opacity(errorMessage != nil ? 1 : 0)
         }
         .animation(.easeInOut(duration: 0.2), value: errorMessage)
     }
