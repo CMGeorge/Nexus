@@ -20,14 +20,23 @@ Always work inside the `backend/` submodule. All code follows Domain-Driven Desi
 ```
 backend/
   app/
-    auth/           # JWT, refresh tokens, password hashing
+    auth/           # JWT, refresh tokens, password hashing, MFA
     customers/      # Customer CRUD, search, history
-    co    co    co    co    co    co    co    co    co    co    co    co    co    co    co   g, calendar, reminde    co    co    co    co    co    co    co    co    co    co    co    co    co    co    co   g, calendar, reminde    co    co    co    co    co    co    co    co    co    co    co    co    co    co    co   g, calendar, reminde    co    co    co    co  age, thumbnails
+    companies/      # Tenant settings, branding, subscription
+    appointments/   # Scheduling, calendar, reminders
+    jobs/           # Work orders, status tracking
+    invoices/       # Invoices, PDF generation, payments, eFactura
+    chat/           # Internal team chat + customer messaging
+    tasks/          # Internal task management
+    loyalty/        # Loyalty points + referral program
+    website/        # Website provisioning for clients
+    users/          # User management, roles, permissions
+    notifications/  # Email, SMS, push templates
+    files/          # Upload, storage, thumbnails
     core/           # Shared: config, deps, middleware, base models
-    core/    auth/
-    customers/
-    ...
   alembic/
+  tests/
+```
   pyproject.toml
 ```
 
