@@ -16,6 +16,7 @@ You are an iOS developer for the Nexus multi-tenant SaaS platform. You build the
 - **State Management**: Observation framework (`@Observable`, `@State`, `@Environment`)
 - **Navigation**: `NavigationStack` with value-based navigation
 - **Persistence**: SwiftData (local persistence/cache), Keychain (secure storage)
+- **Payments**: StoreKit 2 (`Product`, `Transaction`, `SubscriptionStoreView`) — in-app purchases and auto-renewable subscriptions
 - **Testing**: Swift Testing (`@Test`, `#expect`) and XCTest where required
 - **Package Management**: Swift Package Manager (SPM)
 
@@ -422,6 +423,105 @@ In the ViewModel layer, institution users can toggle `selectedBranchId` via the 
 - Biometric (Face ID / Touch ID) for quick re-auth
 - App data encrypted at rest (iOS does this by default with file protection)
 
+## StoreKit 2 — In-App Purchases & Subscriptions
+
+### Framework
+- Use **StoreKit 2** (`Product`, `Transaction`, `SubscriptionStoreView`) — the modern async API.
+- Do NOT use the older StoreKit 1 `SKProductRequest` / `SKPaymentQueue` API.
+
+### Subscription Model (Nexus Pricing)
+Nexus uses auto-renewable subscriptions mapped to platform pricing tiers:
+```
+Tier       Price    Features
+──────────────────────────────────────────
+Starter     99 RON  — 3 users, 100 customers, basic appointments + invoices
+Professional 249 RON — 10 users, unlimited customers, tasks, eFactura, internal chat
+Business    499 RON — 25 users, client portal, loyalty, website booking, 24/7 support
+```
+- Products are defined in **App Store Connect** with the same identifiers used by the backend.
+- The backend is the source of truth for entitlement validation (receipt verification).
+- The iOS app uses StoreKit for local UI state — never for entitlement enforcement.
+
+### Patterns
+
+#### Product Fetching
+```swift
+actor StoreController {
+    private var products: [Product] = []
+
+    func loadProducts() async throws {
+        let identifiers = ["nexus_starter", "nexus_professional", "nexus_business"]
+        products = try await Product.products(for: Set(identifiers))
+    }
+}
+```
+
+#### Purchase Flow
+```swift
+@MainActor
+@Observable
+final class StoreViewModel {
+    var products: [Product] = []
+    var purchaseState: PurchaseState = .idle
+
+    func purchase(_ product: Product) async {
+        purchaseState = .loading
+        do {
+            let result = try await product.purchase()
+            switch result {
+            case .success(let verification):
+                let transaction = try verification.payloadValue
+                await transaction.finish()
+                purchaseState = .success(transaction)
+            case .pending:
+                purchaseState = .pending  // Ask-and-buy (parental approval)
+            case .userCancelled:
+                purchaseState = .idle
+            @unknown default:
+                purchaseState = .error("Unknown purchase result")
+            }
+        } catch {
+            purchaseState = .error(error.localizedDescription)
+        }
+    }
+}
+```
+
+#### Transaction Listening
+```swift
+@MainActor
+@Observable
+final class EntitlementManager {
+    var isSubscribed = false
+    var activeSubscription: Product.SubscriptionInfo.Status?
+
+    func observeTransactions() async {
+        for await result in Transaction.updates {
+            guard let transaction = try? result.payloadValue else { continue }
+            isSubscribed = transaction.revocationDate == nil
+            await transaction.finish()
+        }
+    }
+}
+```
+
+### Receipt Validation
+- **Always** validate receipts server-side via the backend API.
+- The backend calls Apple's `/verifyReceipt` endpoint (production) or sandbox URL.
+- The iOS app sends the `transactionID` to the backend after a successful purchase.
+- Do NOT implement receipt validation logic on the client — it can be bypassed.
+
+### Testing
+- Use **StoreKit Testing in Xcode** (`StoreKitTest.framework`, `.storekit` configuration file).
+- Configure `Configuration.storekit` with sample products and subscription groups.
+- Test all states: success, pending (ask-to-buy), cancellation, refund, billing retry.
+- Use `Transaction.beginFakeTransaction()` for automated UI tests.
+
+### Sandbox
+- Test with **Sandbox Apple IDs** (not production accounts).
+- Sandbox subscriptions renew at accelerated rates (1 minute = 1 hour, 1 hour = 1 day).
+- Use `StoreKit.Configuration` with `enableReceiptValidation: false` in debug builds.
+
 ## Checklist Before Submitting
 - [ ] No framework imports in Domain layer
 - [ ] All state changes on @MainActor
@@ -431,3 +531,7 @@ In the ViewModel layer, institution users can toggle `selectedBranchId` via the 
 - [ ] Tests for ViewModel states and UseCase logic
 - [ ] X-Tenant-ID header sent on all API requests
 - [ ] Keychain used for sensitive storage
+- [ ] StoreKit products loaded and purchasable
+- [ ] Receipt validated server-side, not client-side
+- [ ] Sandbox Apple IDs used for testing (not production)
+- [ ] All StoreKit states handled: success, pending, cancelled, failure
