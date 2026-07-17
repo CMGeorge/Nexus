@@ -7,7 +7,10 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from app.appointments.router import router as appointments_router
 from app.auth.router import router as auth_router
+from app.customers.router import router as customers_router
+from app.jobs.router import router as jobs_router
 from app.core.config import settings
 from app.core.database import check_database_health
 from app.core.middleware import RequestIDMiddleware, RequestTimingMiddleware
@@ -68,7 +71,10 @@ async def generic_exception_handler(request: Request, exc: Exception) -> JSONRes
 
 
 # ── Routers ────────────────────────────────────────────────────
+app.include_router(appointments_router, prefix="/api/v1/appointments", tags=["Appointments"])
 app.include_router(auth_router, prefix="/api/v1/auth", tags=["Authentication"])
+app.include_router(customers_router, prefix="/api/v1/customers", tags=["Customers"])
+app.include_router(jobs_router, prefix="/api/v1/jobs", tags=["Jobs"])
 
 
 # ── Health check ───────────────────────────────────────────────

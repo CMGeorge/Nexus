@@ -1,0 +1,40 @@
+{
+  "": {
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/primary.swiftdeps"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusAppTests/Data/CustomerDTOTests.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/CustomerDTOTests.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/CustomerDTOTests.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/CustomerDTOTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/CustomerDTOTests.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/CustomerDTOTests.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusAppTests/Data/CustomerRepositoryTests.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/CustomerRepositoryTests.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/CustomerRepositoryTests.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/CustomerRepositoryTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/CustomerRepositoryTests.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/CustomerRepositoryTests.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusAppTests/Domain/LoginUseCaseTests.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/LoginUseCaseTests.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/LoginUseCaseTests.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/LoginUseCaseTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/LoginUseCaseTests.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/LoginUseCaseTests.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusAppTests/NexusAppTests.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/NexusAppTests.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/NexusAppTests.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/NexusAppTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/NexusAppTests.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/NexusAppTests.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusAppTests/Presentation/CustomerListViewModelTests.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/CustomerListViewModelTests.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/CustomerListViewModelTests.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/CustomerListViewModelTests~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/CustomerListViewModelTests.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusAppTests.build/CustomerListViewModelTests.dia"
+  }
+}

@@ -1,0 +1,1 @@
+"""Customers bounded context: manage end-customers of a tenant's business."""

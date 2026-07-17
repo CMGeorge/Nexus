@@ -1,0 +1,250 @@
+{
+  "": {
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/primary.swiftdeps"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/App/NexusApp.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusApp.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusApp.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusApp.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusApp.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Core/Constants/API.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/API.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/API.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/API~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/API.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/API.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Core/Protocols/ViewModel.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/ViewModel.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/ViewModel.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/ViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/ViewModel.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/ViewModel.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/DI/AppContainer.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AppContainer.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AppContainer.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AppContainer~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AppContainer.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AppContainer.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Data/DTOs/CustomerDTO.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerDTO.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerDTO.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerDTO~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerDTO.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerDTO.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Data/DTOs/LoginResponseDTO.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoginResponseDTO.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoginResponseDTO.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoginResponseDTO~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoginResponseDTO.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoginResponseDTO.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Data/Network/APIEndpoint.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/APIEndpoint.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/APIEndpoint.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/APIEndpoint~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/APIEndpoint.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/APIEndpoint.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Data/Network/AuthInterceptor.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthInterceptor.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthInterceptor.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthInterceptor~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthInterceptor.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthInterceptor.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Data/Network/HTTPClient.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/HTTPClient.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/HTTPClient.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/HTTPClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/HTTPClient.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/HTTPClient.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Data/Network/TenantHeaderInterceptor.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/TenantHeaderInterceptor.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/TenantHeaderInterceptor.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/TenantHeaderInterceptor~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/TenantHeaderInterceptor.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/TenantHeaderInterceptor.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Data/Network/URLSessionHTTPClient.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/URLSessionHTTPClient.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/URLSessionHTTPClient.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/URLSessionHTTPClient~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/URLSessionHTTPClient.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/URLSessionHTTPClient.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Data/Persistence/KeychainManager.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/KeychainManager.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/KeychainManager.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/KeychainManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/KeychainManager.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/KeychainManager.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Data/Repositories/AuthRepositoryImpl.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthRepositoryImpl.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthRepositoryImpl.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthRepositoryImpl~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthRepositoryImpl.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthRepositoryImpl.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Data/Repositories/CustomerRepository.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerRepository.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerRepository.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerRepository~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerRepository.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerRepository.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Domain/Entities/Customer.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/Customer.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/Customer.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/Customer~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/Customer.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/Customer.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Domain/Entities/Tenant.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/Tenant.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/Tenant.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/Tenant~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/Tenant.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/Tenant.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Domain/Entities/User.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/User.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/User.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/User~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/User.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/User.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Domain/Errors/DomainError.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/DomainError.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/DomainError.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/DomainError~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/DomainError.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/DomainError.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Domain/RepositoryProtocols/AuthRepository.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthRepository.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthRepository.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthRepository~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthRepository.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthRepository.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Domain/RepositoryProtocols/CustomerRepositoryProtocol.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerRepositoryProtocol.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerRepositoryProtocol.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerRepositoryProtocol~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerRepositoryProtocol.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerRepositoryProtocol.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Domain/UseCases/Auth/LoginUseCase.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoginUseCase.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoginUseCase.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoginUseCase~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoginUseCase.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoginUseCase.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Presentation/Common/ErrorBanner.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/ErrorBanner.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/ErrorBanner.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/ErrorBanner~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/ErrorBanner.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/ErrorBanner.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Presentation/Common/LoadingView.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoadingView.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoadingView.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoadingView~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoadingView.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoadingView.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Presentation/Common/NexusAsyncImage.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusAsyncImage.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusAsyncImage.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusAsyncImage~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusAsyncImage.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusAsyncImage.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Presentation/Common/NexusButton.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusButton.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusButton.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusButton~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusButton.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusButton.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Presentation/Common/NexusCard.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusCard.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusCard.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusCard~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusCard.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusCard.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Presentation/Common/NexusTextField.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusTextField.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusTextField.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusTextField~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusTextField.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusTextField.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Presentation/Scenes/Auth/AuthViewModel.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthViewModel.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthViewModel.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthViewModel.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/AuthViewModel.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Presentation/Scenes/Auth/LoginView.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoginView.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoginView.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoginView~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoginView.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/LoginView.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Presentation/Scenes/Auth/RegisterView.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/RegisterView.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/RegisterView.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/RegisterView~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/RegisterView.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/RegisterView.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Presentation/Scenes/Customers/CustomerDetailView.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerDetailView.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerDetailView.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerDetailView~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerDetailView.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerDetailView.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Presentation/Scenes/Customers/CustomerListView.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerListView.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerListView.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerListView~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerListView.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/CustomerListView.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Presentation/Scenes/Dashboard/DashboardView.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/DashboardView.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/DashboardView.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/DashboardView~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/DashboardView.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/DashboardView.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Presentation/Scenes/MainTabView.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/MainTabView.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/MainTabView.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/MainTabView~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/MainTabView.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/MainTabView.dia"
+  },
+  "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/NexusApp/Presentation/Theme/NexusTheme.swift": {
+    "dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusTheme.d",
+    "object": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusTheme.swift.o",
+    "swiftmodule": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusTheme~partial.swiftmodule",
+    "swift-dependencies": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusTheme.swiftdeps",
+    "diagnostics": "/Users/cmgeorge/Dev/CMGeorge/Nexus/mobile/ios/NexusApp/.build/arm64-apple-macosx/debug/NexusApp.build/NexusTheme.dia"
+  }
+}

@@ -1,4 +1,4 @@
-"""FastAPI dependency injection: auth, tenant, session."""
+"""FastAPI dependency injection: auth, tenant, session, rate limiting."""
 
 from typing import Annotated, Any
 from uuid import UUID
@@ -8,11 +8,36 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.config import settings
 from app.core.database import get_session
+from app.core.redis_client import get_redis
 from app.core.security import decode_access_token
 from app.core.tenant import Tenant, get_accessible_tenant_ids
 
 bearer_scheme = HTTPBearer(auto_error=False)
+
+
+def require_role(*allowed_roles: str):
+    """Factory that returns a FastAPI dependency enforcing role-based access.
+
+    Usage: Depends(require_role("Admin"))
+           Depends(require_role("Admin", "Manager"))
+    Raises 403 if the user does not have any of the allowed roles.
+    """
+
+    async def _check(
+        current_user: dict[str, Any] = Depends(get_current_user),
+    ) -> dict[str, Any]:
+        user_roles: str = current_user.get("roles", "")
+        user_role_set = set(user_roles.split(","))
+        if not user_role_set.intersection(allowed_roles):
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Insufficient permissions.",
+            )
+        return current_user
+
+    return _check
 
 
 async def get_current_user(
@@ -102,6 +127,15 @@ async def get_current_tenant(
 
     return tenant
 
+async def get_current_tenant_id(
+    tenant: Tenant = Depends(get_current_tenant),
+) -> UUID:
+    """Dependency that returns just the tenant UUID.
+
+    Use this when you only need the tenant ID, not the full Tenant ORM object.
+    This is the preferred dependency for most domain routers.
+    """
+    return tenant.id
 
 async def get_accessible_scope(
     current_tenant: Tenant = Depends(get_current_tenant),
@@ -118,10 +152,54 @@ async def get_accessible_scope(
     return await get_accessible_tenant_ids(current_tenant.id, session)
 
 
+def rate_limit(max_requests: int = 60, window_seconds: int = 60):
+    """Factory that returns a FastAPI dependency for Redis-based rate limiting.
+
+    Uses a sliding window approach: key = rate_limit:{tenant_id}:{endpoint_path}
+    Returns 429 with Retry-After header when limit is exceeded.
+
+    Usage: Depends(rate_limit(max_requests=30, window_seconds=60))
+    """
+
+    async def _check(
+        request: Request,
+        current_user: dict[str, Any] = Depends(get_current_user),
+    ) -> None:
+        try:
+            r = await get_redis()
+        except Exception:
+            return  # Redis unavailable — skip rate limiting (fail open)
+
+        tenant_id = current_user.get("tenant_id", "unknown")
+        endpoint = request.url.path
+        key = f"rate_limit:{tenant_id}:{endpoint}"
+
+        current = await r.incr(key)
+        if current == 1:
+            await r.expire(key, window_seconds)
+
+        if current > max_requests:
+            ttl = await r.ttl(key)
+            raise HTTPException(
+                status_code=429,
+                detail="Too many requests. Please try again later.",
+                headers={
+                    "Retry-After": str(ttl),
+                    "X-RateLimit-Limit": str(max_requests),
+                    "X-RateLimit-Remaining": "0",
+                },
+            )
+
+    return _check
+
+
 # Re-export for convenience
 __all__ = [
     "get_current_user",
     "get_current_tenant",
+    "get_current_tenant_id",
     "get_accessible_scope",
     "get_session",
+    "require_role",
+    "rate_limit",
 ]

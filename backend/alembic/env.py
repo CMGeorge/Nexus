@@ -10,7 +10,11 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 from alembic import context
 
 # Import all models so Alembic can detect them
+from app.appointments.models import Appointment  # noqa: F401
 from app.auth.models import RefreshToken, User  # noqa: F401
+from app.core.tenant import Tenant  # noqa: F401
+from app.customers.models import Customer, CustomerNote  # noqa: F401
+from app.jobs.models import Job  # noqa: F401
 from app.core.config import settings
 from app.core.database import Base
 

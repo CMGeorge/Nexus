@@ -1,6 +1,6 @@
 ---
 description: "Lead orchestrator for Nexus development. Use when: implementing complex features that span multiple domains, planning new bounded contexts end-to-end, or any task requiring coordination across specialist agents. Tracks all work in Redmine (#57 nexus-saas) via issues and task-packets."
-tools: [vscode, execute, read, agent, browser, 'wesell_redmine/*', vscodeGeneral/rename, vscodeGeneral/usages, vscodeNotebooks/createJupyterNotebook, vscodeNotebooks/editNotebook, edit, search, web, todo]
+tools: [vscode, execute, read, agent, ms-azuretools.vscode-containers, browser, 'wesell_redmine/*', vscodeGeneral/rename, vscodeGeneral/usages, vscodeNotebooks/createJupyterNotebook, vscodeNotebooks/editNotebook, ms-python.python, edit, search, web, todo]
 user-invocable: true
 argument-hint: "complex feature or epic to implement"
 agents: [architect, api-designer, db-migrator, test-writer, code-reviewer, code-reviewer-backend, security-auditor, ios-developer, android-developer, playwright-tester]

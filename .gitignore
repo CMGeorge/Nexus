@@ -49,3 +49,5 @@ dist/
 *.xcworkspace
 xcuserdata/
 Pods/
+*.build/
+*.swiftpm

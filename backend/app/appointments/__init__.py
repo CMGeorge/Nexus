@@ -1,0 +1,1 @@
+"""Appointments bounded context: scheduling for tenant businesses."""
