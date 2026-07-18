@@ -11,6 +11,11 @@ final class AppContainer {
     /// The login screen checks this to show an on-screen warning.
     static var isFirebaseConfigured: Bool = false
 
+    /// Whether the API base URL is properly configured.
+    /// When `false` in Debug builds, the login screen shows a warning banner.
+    /// In Release builds this is always `true` (the app would crash otherwise).
+    static var isAPIConfigured: Bool { APIConfiguration.isConfigured }
+
     let authInterceptor: AuthInterceptor
     let tenantInterceptor: TenantHeaderInterceptor
     let httpClient: HTTPClient

@@ -27,7 +27,6 @@ struct LoginView: View {
         }
     }
 
-    @ViewBuilder
     private func loginContent(with vm: AuthViewModel) -> some View {
         NavigationStack {
             VStack(spacing: 24) {
@@ -37,6 +36,20 @@ struct LoginView: View {
                         Image(systemName: "exclamationmark.triangle.fill")
                             .foregroundStyle(.orange)
                         Text("GoogleService-Info.plist not found. Push notifications disabled.")
+                            .font(.caption)
+                            .foregroundStyle(.orange)
+                    }
+                    .padding(10)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(.orange.opacity(0.1), in: RoundedRectangle(cornerRadius: 8))
+                }
+
+                // ── API URL Warning (Debug only) ───────────
+                if !AppContainer.isAPIConfigured {
+                    HStack(spacing: 6) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundStyle(.orange)
+                        Text("API_BASE_URL not set. Falling back to api.nexus.local")
                             .font(.caption)
                             .foregroundStyle(.orange)
                     }
@@ -84,7 +97,6 @@ struct LoginView: View {
                 NexusTextField(
                     placeholder: "Email",
                     text: Binding(get: { vm.email }, set: { vm.email = $0 }),
-                    errorMessage: vm.emailError,
                     keyboardType: .emailAddress,
                     textContentType: .emailAddress
                 )
@@ -93,7 +105,6 @@ struct LoginView: View {
                     placeholder: "Password",
                     text: Binding(get: { vm.password }, set: { vm.password = $0 }),
                     isSecure: true,
-                    errorMessage: vm.passwordError,
                     textContentType: .password
                 )
 

@@ -30,6 +30,7 @@ services:
 
   # Frontend (requires frontend/ submodule — not yet available)
   frontend:
+    profiles: [full]
     build:
       context: ./frontend
       dockerfile: Dockerfile

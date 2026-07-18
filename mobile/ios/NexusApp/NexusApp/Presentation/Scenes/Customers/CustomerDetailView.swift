@@ -92,13 +92,11 @@ struct CustomerFormView: View {
                     NexusTextField(
                         placeholder: "First Name",
                         text: $firstName,
-                        errorMessage: firstNameError,
                         onSubmit: { validateFirstName() }
                     )
                     NexusTextField(
                         placeholder: "Last Name",
                         text: $lastName,
-                        errorMessage: lastNameError,
                         onSubmit: { validateLastName() }
                     )
                 }
@@ -106,14 +104,12 @@ struct CustomerFormView: View {
                     NexusTextField(
                         placeholder: "Email",
                         text: $email,
-                        errorMessage: emailError,
                         keyboardType: .emailAddress,
                         textContentType: .emailAddress
                     )
                     NexusTextField(
                         placeholder: "Phone",
                         text: $phone,
-                        errorMessage: phoneError,
                         keyboardType: .phonePad,
                         textContentType: .telephoneNumber
                     )

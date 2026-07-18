@@ -11,8 +11,8 @@ help: ## Show this help
 
 # ── Docker ──
 
-up: ## Start all services (base compose — infra + api)
-	docker compose --env-file .env up -d --build
+up: ## Start all services with dev ports (367x) and hot-reload
+	docker compose -f docker-compose.yml -f docker-compose.dev.yml --env-file .env up -d --build
 
 up-dev: ## Start with dev overlay (exposed ports, hot-reload, no frontend)
 	docker compose -f docker-compose.yml -f docker-compose.dev.yml --env-file .env up -d --build

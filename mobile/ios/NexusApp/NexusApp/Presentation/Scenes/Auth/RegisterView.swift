@@ -26,7 +26,6 @@ struct RegisterView: View {
                 NexusTextField(
                     placeholder: "Email",
                     text: Binding(get: { vm.email }, set: { vm.email = $0 }),
-                    errorMessage: vm.emailError,
                     keyboardType: .emailAddress,
                     textContentType: .emailAddress
                 )
@@ -34,27 +33,23 @@ struct RegisterView: View {
                     placeholder: "Password",
                     text: Binding(get: { vm.password }, set: { vm.password = $0 }),
                     isSecure: true,
-                    errorMessage: vm.passwordError,
                     textContentType: .newPassword
                 )
             }
             Section("Profile") {
                 NexusTextField(
                     placeholder: "First Name",
-                    text: Binding(get: { vm.firstName }, set: { vm.firstName = $0 }),
-                    errorMessage: vm.firstNameError
+                    text: Binding(get: { vm.firstName }, set: { vm.firstName = $0 })
                 )
                 NexusTextField(
                     placeholder: "Last Name",
-                    text: Binding(get: { vm.lastName }, set: { vm.lastName = $0 }),
-                    errorMessage: vm.lastNameError
+                    text: Binding(get: { vm.lastName }, set: { vm.lastName = $0 })
                 )
             }
             Section("Company") {
                 NexusTextField(
                     placeholder: "Company Name",
-                    text: Binding(get: { vm.tenantName }, set: { vm.tenantName = $0 }),
-                    errorMessage: vm.tenantNameError
+                    text: Binding(get: { vm.tenantName }, set: { vm.tenantName = $0 })
                 )
             }
             Section {
